@@ -101,6 +101,7 @@ module.exports = {
       // app level aliases
       '@components': resolve(`${paths.appSrc}/components`),
       '@modules': resolve(`${paths.appSrc}/modules`),
+      '@utils': resolve(`${paths.appSrc}/utils`),
     },
     plugins: [
       // Prevents users from importing files from outside of src/ (or node_modules/).

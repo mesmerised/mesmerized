@@ -1,50 +1,68 @@
 import React, { Component } from 'react';
 import './image.css';
 import placeholderImg from './placeholder.png';
-import { imagePrefetch } from './utils';
+import { prefetch } from '@utils/image.utils';
 
 class Image extends Component {
     static defaultProps = {
-        isLazy: true,
-        onLoad: x => x
+        alt: '',
+        placeholder: placeholderImg,
+        extraClasses: '',
+        onLoad: x => x,
+        onError: x => x
     };
 
-    constructor(props) {
-        super(props)
-        this.state = {isLoaded: false};
-    }
+    state = {
+        isLoaded: false,
+        isError: false
+    };
 
     componentDidMount() {
         const {
-            isLazy,
             src,
-            onLoad
+            timeout,
+            onLoad,
+            onError
         } = this.props;
 
-        isLazy && imagePrefetch(src)
+        prefetch(src, timeout)
             .then(img => {
-                this.setState({isLoaded: true});
+                this.setState({
+                    isLoaded: true,
+                    isError: false
+                });
                 onLoad(img);
+            })
+            .catch(img => {
+                this.setState({
+                    isLoaded: false,
+                    isError: true
+                });
+                onError(img);
             });
     }
 
     render() {
         const {
-            isLazy,
             src,
             alt,
-            extraClasses = ''
+            placeholder,
+            extraClasses
         } = this.props;
-        const { isLoaded } = this.state;
-        const imageSource = isLoaded || !isLazy ? src : placeholderImg;
+        const {
+            isLoaded,
+            isError
+        } = this.state;
 
-        let dataSrc = src;
-        if(imageSource !== placeholderImg ) dataSrc = null;
+        const imageSource = isLoaded ? src : placeholder;
+        const isLoadingClass = !isLoaded && !isError ? 'image__loading' : '';
 
-        return <img className={ `image ${extraClasses}` }
-                    src={ imageSource }
-                    alt={ alt }
-                    data-src={ dataSrc } />
+        return (
+            <img
+                className={ `image ${isLoadingClass} ${extraClasses}` }
+                src={ imageSource }
+                alt={ alt } />
+        );
     }
 
 }

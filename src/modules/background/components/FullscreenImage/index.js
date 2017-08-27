@@ -6,7 +6,9 @@ class FullScreenImage extends Component {
     render() {
         return (
             <div className="background">
-                <Image extraClasses="background__image" {...this.props} />
+                <Image
+                    extraClasses="background__image"
+                    {...this.props} />
             </div>
         );
     }
