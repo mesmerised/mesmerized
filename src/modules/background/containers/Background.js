@@ -1,14 +1,25 @@
 import React, { Component } from 'react';
 import FullscreenImage from '../components/FullscreenImage';
 import placeholderImage from '../images/placeholder.jpeg';
+import { getPhotoUrl, getRandomPrefetchedPhoto, prefetchRandomPhotos } from '../api';
+
+// @todo: use local photos if nothing is available
+const photoUrl = getPhotoUrl(getRandomPrefetchedPhoto()) || placeholderImage;
+
+// @todo: update api credits
+// @todo: configurable category settings
 
 class Background extends Component {
+    componentDidMount() {
+        prefetchRandomPhotos();
+    }
+
     render() {
         return (
             <FullscreenImage
-                src="https://unsplash.it/2048/1280?random"
+                src={ photoUrl }
                 placeholder={ placeholderImage }
-                timeout={ 2000 } />
+                timeout={ 1500 } />
         );
     }
 }
