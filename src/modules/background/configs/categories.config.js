@@ -1,7 +1,7 @@
 /**
  * @see https://unsplash.com/explore
  */
-export default {
+module.exports = {
     'business': 'Business',
     'coffee': 'Coffee',
     'nature': 'Nature',

@@ -106,7 +106,10 @@
     "extends": "react-app"
   },
   "devDependencies": {
-    "react-toolbox-themr": "^1.0.2"
+    "download": "^6.2.5",
+    "imageoptim": "^0.4.2",
+    "react-toolbox-themr": "^1.0.2",
+    "request": "^2.81.0"
   },
   "reactToolbox": {
     "output": "./src/assets/react-toolbox"
