@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './styles/base.css';
+import App from './app';
 import TabPageContainer from './containers/TabPage';
 
-ReactDOM.render(<TabPageContainer />, document.getElementById('root'));
+ReactDOM.render(<App><TabPageContainer /></App>, document.getElementById('root'));

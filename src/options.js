@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './styles/base.css';
+import App from './app';
 import SettingsContainer from './containers/Settings';
 
-ReactDOM.render(<SettingsContainer />, document.getElementById('root'));
+ReactDOM.render(<App><SettingsContainer /></App>, document.getElementById('root'));
