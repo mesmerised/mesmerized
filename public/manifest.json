@@ -14,7 +14,7 @@
     "newtab": "tabpage.html"
   },
   "options_ui": {
-    "chrome_style": true,
+    "chrome_style": false,
     "page": "options.html"
   },
   "permissions": [
