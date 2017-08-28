@@ -9,11 +9,11 @@ const randomPhotoApiUrl = `${base}${uris.randomPhoto}`;
 
 const DEFAULTS = {
     featured: true, orientation: 'landscape',
-    w: 1920, h: 1048, count: 10,
+    w: 1920, h: 1048, count: 20,
     client_id,
 };
 
-const MAX_PREFETCH_COUNT = 50;
+const PREFETCH_THRESHOLD = 10;
 const prefetchedPhotoCacheKey = cacheConfigs.prefetchedPhotos;
 
 /**
@@ -54,7 +54,7 @@ export function prefetchRandomPhotos() {
         && Object.keys(prefetchedPhotos).length;
 
     // if sufficient buffer, do not prefetch
-    if (exisitngPrefetchedPhotosCount >= MAX_PREFETCH_COUNT) return;
+    if (exisitngPrefetchedPhotosCount >= PREFETCH_THRESHOLD) return;
 
     // call random photos api
     // then use image prefetch technique to prefetch the photo url
