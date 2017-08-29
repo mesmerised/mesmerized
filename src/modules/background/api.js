@@ -41,7 +41,7 @@ export function fetchRandomPhotos(params = {}) {
     const url = toUrl(randomPhotoApiUrl, params);
 
     return fetch(url).then(response => response.json())
-            .catch(response => response.error);
+            .catch(response => []);
 }
 
 /**
