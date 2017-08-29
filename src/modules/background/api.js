@@ -6,15 +6,17 @@ import cacheConfigs from './configs/cache.config';
 
 const { client_id, base, uris } = apiConfigs;
 const randomPhotoApiUrl = `${base}${uris.randomPhoto}`;
+const prefetchedPhotoCacheKey = cacheConfigs.prefetchedPhotos;
 
+// random photos api defaults
 const DEFAULTS = {
     featured: true, orientation: 'landscape',
     w: 1920, h: 1048, count: 20,
     client_id,
 };
 
+// max photos to prefetch
 const PREFETCH_THRESHOLD = 10;
-const prefetchedPhotoCacheKey = cacheConfigs.prefetchedPhotos;
 
 /**
  * Returns the photo url to use from the photo object.
@@ -47,6 +49,8 @@ export function fetchRandomPhotos(params = {}) {
 /**
  * Prefetches the usable photo urls and
  * stores corresponding photo objects in the cache.
+ *
+ * @todo: configurable categories option
  */
 export function prefetchRandomPhotos() {
     const prefetchedPhotos = StorageUtils.get(prefetchedPhotoCacheKey);
@@ -73,17 +77,14 @@ export function prefetchRandomPhotos() {
 /**
  * Returns a random prefetched photo object from the cache.
  * The returned photo is removed from the cache.
- * If the cache is empty, it initiates a prefetch.
  *
  * @return {Object}     Photo object as per the API
  */
 export function getRandomPrefetchedPhoto() {
     const prefetchedPhotos = StorageUtils.get(prefetchedPhotoCacheKey);
 
-    // no pre-fetched photos
-    // start pre-fetching
+    // no pre-fetched photos, return
     if (!prefetchedPhotos || !Object.keys(prefetchedPhotos).length) {
-        prefetchRandomPhotos();
         return;
     }
 
