@@ -1,6 +1,6 @@
 const module = 'background';
 
 export default {
-    prefetchedPhotos: `${module}.prefetched.photos`,
-    randomPhotos: `${module}.random.photos`,
+    prefetchedPhotos: `${module}.photos.prefetched`,
+    randomPhotos: `${module}.photos.random`,
 };
