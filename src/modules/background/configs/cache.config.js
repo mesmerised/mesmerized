@@ -1,7 +1,7 @@
-const module = 'background';
+import { MODULE_NAME } from './constants';
 
 export default {
-    prefetchedPhotos: `${module}.photos.prefetched`,
-    randomPhotos: `${module}.photos.random`,
-    localPhotos: `${module}.photos.local`,
+    prefetchedPhotos: `${MODULE_NAME}.photos.prefetched`,
+    randomPhotos: `${MODULE_NAME}.photos.random`,
+    localPhotos: `${MODULE_NAME}.photos.local`,
 };

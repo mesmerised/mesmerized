@@ -1,3 +1,4 @@
-import BackgroundContainer from './containers/Background';
+import Container from './containers/Background';
+import Settings from './containers/Settings';
 
-export { BackgroundContainer as Container };
+export { Container, Settings };
