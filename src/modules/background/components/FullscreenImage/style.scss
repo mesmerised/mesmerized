@@ -6,7 +6,7 @@
     height: 200%;
     z-index: -1;
 
-    &__image {
+    &__image, &__overlay {
         position: absolute;
         top: 0;
         left: 0;
@@ -15,6 +15,9 @@
         margin: auto;
         min-width: 50%;
         min-height: 50%;
-        filter: grayscale(20%);
+    }
+
+    &__overlay {
+        background: rgba(0, 0, 0, 0.15);
     }
 }

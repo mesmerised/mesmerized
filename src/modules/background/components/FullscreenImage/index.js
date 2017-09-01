@@ -9,6 +9,7 @@ class FullScreenImage extends Component {
                 <Image
                     extraClasses="background__image"
                     {...this.props} />
+                <div className="background__overlay" />
             </div>
         );
     }
