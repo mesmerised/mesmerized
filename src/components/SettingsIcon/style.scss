@@ -1,0 +1,7 @@
+.settingsIcon {
+    opacity: 0.4;
+    transition: opacity 0.2s;
+    &:hover, &:active {
+        opacity: 1;
+    }
+}
