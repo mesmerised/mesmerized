@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Layout from 'react-toolbox/lib/layout/Layout';
+import Panel from 'react-toolbox/lib/layout/Panel';
 import { Container as BackgroundContainer } from '@modules/background';
+import { Container as QuotesContainer } from '@modules/quotes';
 import SettingsIcon from '@components/SettingsIcon';
 
 class TabPage extends Component {
@@ -8,7 +10,10 @@ class TabPage extends Component {
         return (
             <Layout>
                 <BackgroundContainer />
-                <SettingsIcon />
+                <Panel>
+                    <SettingsIcon />
+                    <QuotesContainer />
+                </Panel>
             </Layout>
         );
     }
