@@ -1,0 +1,30 @@
+.quote {
+    color: #fff;
+    text-shadow: 2px 3.464px 2px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    letter-spacing: 1px;
+    padding: 8px;
+
+    &__text {
+        font-size: 2em;
+        &::before {
+            content: "\201C";
+            margin-right: 2px;
+        }
+        &::after {
+            content: "\201D";
+            margin-left: 2px;
+        }
+    }
+
+    &__authorContainer {
+        font-style: italic;
+        text-align: right;
+    }
+
+    &__authorName {
+        &::before {
+            content: "\2014 \00A0"
+        }
+    }
+}
