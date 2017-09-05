@@ -1,25 +1,9 @@
+import { getRandomInt } from '@utils/general.utils';
 import * as StorageUtils from '@utils/storage.utils';
 import cacheConfigs from './configs/cache.config';
 import categoriesConfig from './configs/categories.config';
 
 const localPhotosCacheKey = cacheConfigs.localPhotos;
-
-/**
- * Get a random integer between the given integers.
- * The minimum is inclusive and the maximum is exclusive.
- * 0, 6 -> would give random min 0 and max 5
- *
- * @todo: move to a common utils
- *
- * @param  {Number} min     Min (inclusive)
- * @param  {Number} max     Max (exclusive)
- * @return {Number}         Random Integer
- */
-function getRandomInt(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min)) + min;
-}
 
 /**
  * Gets the local photos object from cache if present.
