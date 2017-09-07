@@ -1,3 +1,4 @@
+import fetchJsonp from 'fetch-jsonp';
 import { toUrl } from '@utils/url.utils';
 import * as StorageUtils from '@utils/storage.utils';
 import apiConfigs from './configs/api.config';
@@ -9,7 +10,7 @@ const randomQuoteCacheKey = cacheConfigs.randomQuotes;
 // random quotes api defaults
 const DEFAULTS = {
     lang: 'en',
-    format: 'json'
+    format: 'jsonp',
 };
 
 // max quotes to prefetch
@@ -28,7 +29,8 @@ export function fetchRandomQuote(params = {}) {
 
     const url = toUrl(randomQuoteApiUrl, params);
 
-    return fetch(url).then(response => response.json())
+    return fetchJsonp(url, {jsonpCallback: 'jsonp'})
+            .then(response => response.json())
             .catch(response => ({}));
 }
 

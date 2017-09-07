@@ -17,6 +17,7 @@
     "chrome_style": false,
     "page": "options.html"
   },
+  "content_security_policy": "script-src 'self' https://api.forismatic.com; object-src 'self'",
   "permissions": [
     "geolocation",
     "alarms",
