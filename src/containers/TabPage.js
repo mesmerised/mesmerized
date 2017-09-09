@@ -13,8 +13,17 @@ class TabPage extends Component {
             <Layout>
                 <BackgroundContainer />
                 <Panel>
-                    <SettingsIcon />
-                    <QuotesContainer />
+                    <div className="panel">
+                        <div className="panel__topContainer">
+                            <SettingsIcon />
+                        </div>
+                        <div className="panel__centerContainer">
+                            <ClockContainer />
+                        </div>
+                        <div className="panel__bottomContainer">
+                            <QuotesContainer />
+                        </div>
+                    </div>
                 </Panel>
             </Layout>
         );
