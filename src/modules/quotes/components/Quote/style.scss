@@ -1,24 +1,21 @@
 .quote {
-    color: #fff;
     text-shadow: 2px 3.464px 2px rgba(0, 0, 0, 0.5);
     text-align: center;
     letter-spacing: 1px;
-    padding: 8px;
+    padding: 8px 16px;
+    transition: background-color 1s;
+    background-color: rgba(0, 0, 0, 0.2);
+
+    &:hover {
+        background-color: rgba(0, 0, 0, 0.5);
+    }
 
     &__text {
-        font-size: 2rem;
-        &::before {
-            content: "\201C";
-            margin-right: 2px;
-        }
-        &::after {
-            content: "\201D";
-            margin-left: 2px;
-        }
+        font-size: 24px;
     }
 
     &__authorContainer {
-        font-size: 1rem;
+        font-size: 12px;
         font-style: italic;
         text-align: right;
     }
