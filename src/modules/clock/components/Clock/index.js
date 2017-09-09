@@ -8,7 +8,7 @@ const ONE_SECOND = 1000;
 class Clock extends Component {
     static defaultProps = {
         is12hours: false,
-        blinkForSeconds: true,
+        blinkForSeconds: false,
     };
 
     state = {
