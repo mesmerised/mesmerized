@@ -5,6 +5,7 @@ import List from 'react-toolbox/lib/list/List';
 import ListDivider from 'react-toolbox/lib/list/ListDivider';
 import { Settings as BackgroundSettings } from '@modules/background';
 import { Settings as ClockSettings } from '@modules/clock';
+import { Settings as QuotesSettings } from '@modules/quotes';
 import './Settings.css';
 
 class Settings extends Component {
@@ -14,6 +15,8 @@ class Settings extends Component {
                 <Panel>
                     <List selectable ripple>
                         <BackgroundSettings />
+                        <ListDivider />
+                        <QuotesSettings />
                         <ListDivider />
                         <ClockSettings />
                     </List>
