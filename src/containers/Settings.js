@@ -1,22 +1,22 @@
 import React, { Component } from 'react';
 import Layout from 'react-toolbox/lib/layout/Layout';
 import Panel from 'react-toolbox/lib/layout/Panel';
+import List from 'react-toolbox/lib/list/List';
+import ListDivider from 'react-toolbox/lib/list/ListDivider';
 import { Settings as BackgroundSettings } from '@modules/background';
 import { Settings as ClockSettings } from '@modules/clock';
+import './Settings.css';
 
 class Settings extends Component {
     render() {
         return (
             <Layout>
                 <Panel>
-                    <div style={{ flex: 1, overflowY: 'auto', padding: '1.8rem' }}>
-                        <section>
-                            <BackgroundSettings />
-                        </section>
-                        <section>
-                            <ClockSettings />
-                        </section>
-                    </div>
+                    <List selectable ripple>
+                        <BackgroundSettings />
+                        <ListDivider />
+                        <ClockSettings />
+                    </List>
                 </Panel>
             </Layout>
         );
