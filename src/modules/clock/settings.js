@@ -6,6 +6,7 @@ import { settingsFactory } from '@utils/settings.utils';
  * @type {Object}
  */
 const defaults = {
+    showClock: true,
     tewelveHourFormat: false,
     blinkForSeconds: false,
 }

@@ -9,7 +9,7 @@ class Clock extends Component {
             blinkForSeconds: Settings.blinkForSeconds,
         };
         return (
-            <ClockComponent { ...props } />
+            Settings.showClock && <ClockComponent { ...props } />
         );
     }
 }
