@@ -1,3 +1,4 @@
 import Container from './containers/Quotes';
+import Settings from './containers/Settings';
 
-export { Container };
+export { Container, Settings };
