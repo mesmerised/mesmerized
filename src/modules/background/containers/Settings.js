@@ -1,19 +1,8 @@
 import React, { Component } from 'react';
-import Switch from 'react-toolbox/lib/switch/Switch';
-import Tooltip from 'react-toolbox/lib/tooltip';
-import FontIcon from 'react-toolbox/lib/font_icon/FontIcon';
+import List from 'react-toolbox/lib/list/List';
+import ListSubHeader from 'react-toolbox/lib/list/ListSubHeader';
+import ListCheckbox from 'react-toolbox/lib/list/ListCheckbox';
 import Settings from '../settings';
-import './Settings.css';
-
-const FontIconTooltip = Tooltip(FontIcon);
-const HelpIcon = ( { className = '' } ) => (
-    <FontIconTooltip
-        className={ className }
-        value="help"
-        tooltipPosition="right"
-        tooltip="Load fresh wallpapers from the server. If disabled, it will cycle through a list of local wallpapers only."
-    />
-);
 
 class SettingsContainer extends Component {
     state = {
@@ -29,14 +18,14 @@ class SettingsContainer extends Component {
         const { fetchFromServer } = this.state;
 
         return (
-            <div className="settingsOption">
-                <Switch
-                    className="settingsOption__option"
+            <List selectable ripple>
+                <ListSubHeader caption="Background Photos" />
+                <ListCheckbox
+                    caption="Load Fresh"
+                    legend="If disabled, it will cycle through a list of locally stored wallpapers only."
                     checked={ fetchFromServer }
-                    label="Fresh Backgrounds"
                     onChange={ this.handleChange } />
-                <HelpIcon className="settingsOption__helpIcon"/>
-            </div>
+            </List>
         );
     }
 }
