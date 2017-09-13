@@ -1,3 +1,13 @@
 body {
     min-width: 620px;
 }
+
+.settings {
+    &__inlineItem {
+        display: inline-block;
+        margin-right: 12px;
+        &:last-child {
+            margin-right: 0px;
+        }
+    }
+}
