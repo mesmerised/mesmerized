@@ -4,7 +4,13 @@
     &__topContainer {
         position: absolute;
         top: 0px;
-        width: 100%;
+
+        &_right {
+            right: 0px;
+        }
+        &_left {
+            left: 0px;
+        }
     }
 
     &__centerContainer {
