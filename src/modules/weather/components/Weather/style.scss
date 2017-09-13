@@ -1,0 +1,35 @@
+.weather {
+    text-shadow: 2px 3.464px 2px rgba(0, 0, 0, 0.5);
+    display: inline-block;
+    padding: 8px;
+    background-color: rgba(0, 0, 0, 0.2);
+    transition: background-color 1s;
+    cursor: default;
+    user-select: none;
+
+    &:hover {
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    &__temperature, &__image {
+        display: inline-block;
+    }
+
+    &__temperature {
+        font-size: 28px;
+        font-weight: 800;
+        &::after {
+            content: "\00b0";
+        }
+    }
+
+    &__image {
+        width: 36px;
+        height: 36px;
+        vertical-align: top;
+    }
+
+    &__cityName {
+        font-size: 12px;
+    }
+}

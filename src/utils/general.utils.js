@@ -31,3 +31,6 @@ export function padNumber(num, size = 2) {
     while (s.length < size) s = `0${s}`;
     return s;
 }
+
+export const toCelsius = kelvin => (kelvin - 273.15);
+export const toFahrenheit = kelvin => ((kelvin * 9/5) - 459.67);
