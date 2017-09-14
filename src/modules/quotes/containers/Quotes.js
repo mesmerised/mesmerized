@@ -17,17 +17,26 @@ if (Settings.fetchFromServer) {
 quoteObject = quoteObject || getRandomLocalQuote();
 
 class Quotes extends Component {
+    state = {
+        fetchFromServer: Settings.fetchFromServer,
+        showQuotes: Settings.showQuotes,
+        quote: quoteObject,
+    };
+
     componentDidMount() {
-        Settings.fetchFromServer && prefetchRandomQuote();
+        const { fetchFromServer } = this.state;
+        fetchFromServer && prefetchRandomQuote();
     }
 
     render() {
-        const author  = quoteObject.quoteAuthor || 'Anonymous';
-        const text = quoteObject.quoteText;
+        const { showQuotes, quote = {} } = this.state;
+
+        const author  = quote.quoteAuthor || 'Anonymous';
+        const text = quote.quoteText;
         const props = { author, text };
 
         return (
-            Settings.showQuotes && <QuotesComponent { ...props } />
+            showQuotes && <QuotesComponent { ...props } />
         );
     }
 }
