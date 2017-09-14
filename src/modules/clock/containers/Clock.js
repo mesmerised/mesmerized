@@ -3,13 +3,18 @@ import ClockComponent from '../components/Clock';
 import Settings from '../settings';
 
 class Clock extends Component {
+    state = {
+        is12hours: Settings.tewelveHourFormat,
+        blinkForSeconds: Settings.blinkForSeconds,
+        showClock: Settings.showClock,
+    };
+
     render() {
-        const props = {
-            is12hours: Settings.tewelveHourFormat,
-            blinkForSeconds: Settings.blinkForSeconds,
-        };
+        const { is12hours, blinkForSeconds, showClock } = this.state;
+        const props = { is12hours, blinkForSeconds };
+
         return (
-            Settings.showClock && <ClockComponent { ...props } />
+            showClock && <ClockComponent { ...props } />
         );
     }
 }
