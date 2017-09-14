@@ -8,7 +8,6 @@ import cacheConfigs from '../configs/cache.config';
 import Settings from '../settings';
 
 const lastPositionCacheKey = cacheConfigs.lastPosition;
-const REFRESH_INTERVAL = Settings.refereshInterval;
 const GEO_OPTIONS = { enableHighAccuracy: true };
 
 // call the handler if there is an existing position in the cache
@@ -23,17 +22,21 @@ class Weather extends Component {
         temperature: 0,
         cityName: '',
         iconId: '',
-        unit: Settings.unit
+        unit: Settings.unit,
+        refreshInterval: Settings.refreshInterval,
+        showWeather: Settings.showWeather,
     };
 
     // @todo: handle geolocation errors
     componentDidMount() {
+        const { refreshInterval } = this.state;
+
         // initialize the initial update
         handleGeolocationUpdateForLastFetchedPosition(this);
 
         // update in the given intervals
         this.intervalId = setInterval(() =>
-            handleGeolocationUpdateForLastFetchedPosition(this), REFRESH_INTERVAL);
+            handleGeolocationUpdateForLastFetchedPosition(this), refreshInterval);
 
         // listen to any geolocation updates
         this.wpid = navigator.geolocation.watchPosition(
@@ -53,8 +56,9 @@ class Weather extends Component {
         StorageUtils.set(lastPositionCacheKey,
             { coords: { latitude, longitude } });
 
+        const { refreshInterval } = this.state;
         // @todo: handle errors
-        getWeatherForLocation({latitude, longitude, refreshInterval: REFRESH_INTERVAL})
+        getWeatherForLocation({latitude, longitude, refreshInterval})
             .then(this.handleDataUpdate).catch(x => x);
     };
 
@@ -73,10 +77,10 @@ class Weather extends Component {
     };
 
     render() {
-        const { temperature, cityName, iconId } = this.state;
+        const { temperature, cityName, iconId, showWeather } = this.state;
         const props = { temperature, cityName, iconId };
 
-        if (!Settings.showWeather) return null;
+        if (!showWeather) return null;
 
         return (
             temperature ? <WeatherComponent { ...props } /> : null

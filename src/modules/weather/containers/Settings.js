@@ -11,7 +11,7 @@ import Settings from '../settings';
 
 const REFRESH_INTERVALS = [
     { value: 30*60*1000, label: '30 mins' },
-    { value: 45*60*1000, label: '45mins' },
+    { value: 45*60*1000, label: '45 mins' },
     { value: 60*60*1000, label: '1 hr' },
     { value: 120*60*1000, label: '2 hrs' },
 ];
@@ -20,7 +20,7 @@ class SettingsContainer extends Component {
     state = {
         showWeather: Settings.showWeather,
         unit: Settings.unit,
-        refereshInterval: Settings.refereshInterval,
+        refreshInterval: Settings.refreshInterval,
     };
 
     handleShowChange = (value, ev) => {
@@ -33,13 +33,13 @@ class SettingsContainer extends Component {
         this.setState({unit : value});
     };
 
-    handleRefereshIntervalChange = (value, ev) => {
-        Settings.refereshInterval = parseInt(value, 10);
-        this.setState({refereshInterval : value});
+    handleRefreshIntervallChange = (value, ev) => {
+        Settings.refreshInterval = parseInt(value, 10);
+        this.setState({refreshInterval : value});
     };
 
     render() {
-        const { showWeather, unit, refereshInterval } = this.state;
+        const { showWeather, unit, refreshInterval } = this.state;
 
         const unitsComponent = (
             <RadioGroup
@@ -62,10 +62,10 @@ class SettingsContainer extends Component {
         const refreshIntervalDropdown = (
             <Dropdown
                 label="Refresh Interval"
-                value={ refereshInterval }
+                value={ refreshInterval }
                 source={ REFRESH_INTERVALS }
                 disabled={ !showWeather }
-                onChange={ this.handleRefereshIntervalChange } />
+                onChange={ this.handleRefreshIntervallChange } />
         );
 
         return (

@@ -9,7 +9,7 @@ import { settingsFactory } from '@utils/settings.utils';
 const defaults = {
     unit: METRIC.CELSIUS,
     showWeather: true,
-    refereshInterval: 45 * 60 * 1000 // 45mins
+    refreshInterval: 45 * 60 * 1000 // 45mins
 };
 
 export default settingsFactory({ configs, defaults });
