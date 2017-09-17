@@ -1,8 +1,8 @@
 import { toUrl } from '@utils/url.utils';
 import { prefetch as prefetchImage } from '@utils/image.utils';
 import * as StorageUtils from '@utils/storage.utils';
-import apiConfigs from './configs/api.config';
-import cacheConfigs from './configs/cache.config';
+import apiConfigs from '../configs/api.config';
+import cacheConfigs from '../configs/cache.config';
 
 const { client_id, base, uris } = apiConfigs;
 const randomPhotoApiUrl = `${base}${uris.randomPhoto}`;

@@ -7,7 +7,7 @@ import RadioGroup from 'react-toolbox/lib/radio/RadioGroup';
 import RadioButton from 'react-toolbox/lib/radio/RadioButton';
 import Dropdown from 'react-toolbox/lib/dropdown/Dropdown';
 import { METRIC } from '../configs/constants';
-import Settings from '../settings';
+import Settings from '../utils/settings';
 
 const REFRESH_INTERVALS = [
     { value: 30*60*1000, label: '30 mins' },

@@ -1,4 +1,4 @@
-import configs from './configs/settings.config';
+import configs from '../configs/settings.config';
 import { settingsFactory } from '@utils/settings.utils';
 
 /**
@@ -6,9 +6,7 @@ import { settingsFactory } from '@utils/settings.utils';
  * @type {Object}
  */
 const defaults = {
-    showClock: true,
-    tewelveHourFormat: false,
-    blinkForSeconds: false,
+    fetchFromServer: true,
 }
 
 export default settingsFactory({ configs, defaults });

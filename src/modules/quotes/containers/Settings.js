@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import List from 'react-toolbox/lib/list/List';
 import ListSubHeader from 'react-toolbox/lib/list/ListSubHeader';
 import ListCheckbox from 'react-toolbox/lib/list/ListCheckbox';
-import Settings from '../settings';
+import Settings from '../utils/settings';
 
 class SettingsContainer extends Component {
     state = {

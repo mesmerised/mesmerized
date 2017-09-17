@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import FullscreenImage from '../components/FullscreenImage';
 import placeholderImage from '../images/placeholder.jpeg';
-import { getPhotoUrl, getRandomPrefetchedPhoto, prefetchRandomPhotos } from '../api';
-import { getLocalPhotoPath, getRandomLocalPhoto } from '../photos.local';
-import Settings from '../settings';
+import { getPhotoUrl, getRandomPrefetchedPhoto, prefetchRandomPhotos } from '../utils/api';
+import { getLocalPhotoPath, getRandomLocalPhoto } from '../utils/photos.local';
+import Settings from '../utils/settings';
 
 let photoUrl;
 

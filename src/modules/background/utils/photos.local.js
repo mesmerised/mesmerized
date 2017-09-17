@@ -1,8 +1,9 @@
 import { getRandomInt } from '@utils/general.utils';
 import * as StorageUtils from '@utils/storage.utils';
-import cacheConfigs from './configs/cache.config';
-import categoriesConfig from './configs/categories.config';
+import cacheConfigs from '../configs/cache.config';
+import categoriesConfig from '../configs/categories.config';
 
+const categoriesBasePath = '../images/categories';
 const localPhotosCacheKey = cacheConfigs.localPhotos;
 
 /**
@@ -29,10 +30,10 @@ const categories = Object.keys(categoriesConfig);
 // to indicate they are available for the next usage
 // storage format -> { 'local/path/to/photo' : {photo_json} }
 !getLocalPhotosFromCache() && categories.forEach(c => {
-    import(`./images/categories/${c}.json`)
+    import(`${categoriesBasePath}/${c}.json`)
         .then(photos => {
             photos.forEach(p => {
-                import(`./images/categories/${c}/${p.id}.jpg`)
+                import(`${categoriesBasePath}/${c}/${p.id}.jpg`)
                     .then(path => StorageUtils.update(localPhotosCacheKey, {[path]: p}))
                     .catch(error => error)
             });

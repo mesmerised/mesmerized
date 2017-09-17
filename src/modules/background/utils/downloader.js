@@ -4,10 +4,10 @@
  * folder with photos for each of the given categories
  * and the corresponding json data mapping to the photos.
  *
- * run from root -> node src/modules/background/downloader.js
+ * run from root -> node src/modules/background/utils/downloader.js
  */
 
-const categories = require('./configs/categories.config');
+const categories = require('../configs/categories.config');
 const path = require('path');
 const download = require('download');
 const querystring = require('querystring');

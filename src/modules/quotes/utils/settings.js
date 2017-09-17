@@ -1,4 +1,4 @@
-import configs from './configs/settings.config';
+import configs from '../configs/settings.config';
 import { settingsFactory } from '@utils/settings.utils';
 
 /**

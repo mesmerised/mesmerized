@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import WeatherComponent from '../components/Weather';
-import { getWeatherForLocation } from '../api';
+import { getWeatherForLocation } from '../utils/api';
 import { toCelsius, toFahrenheit } from '@utils/general.utils';
 import * as StorageUtils from '@utils/storage.utils';
 import { METRIC } from '../configs/constants';
 import cacheConfigs from '../configs/cache.config';
-import Settings from '../settings';
+import Settings from '../utils/settings';
 
 const lastPositionCacheKey = cacheConfigs.lastPosition;
 const GEO_OPTIONS = { enableHighAccuracy: true };

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import QuotesComponent from '../components/Quote';
-import { prefetchRandomQuote, getRandomPrefetchedQuote } from '../api';
-import { getRandomLocalQuote } from '../quotes.local';
-import Settings from '../settings';
+import { prefetchRandomQuote, getRandomPrefetchedQuote } from '../utils/api';
+import { getRandomLocalQuote } from '../utils/quotes.local';
+import Settings from '../utils/settings';
 
 let quoteObject;
 

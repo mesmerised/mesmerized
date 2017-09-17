@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ClockComponent from '../components/Clock';
-import Settings from '../settings';
+import Settings from '../utils/settings';
 
 class Clock extends Component {
     state = {

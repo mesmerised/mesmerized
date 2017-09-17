@@ -1,5 +1,5 @@
-import configs from './configs/settings.config';
-import { METRIC } from './configs/constants';
+import configs from '../configs/settings.config';
+import { METRIC } from '../configs/constants';
 import { settingsFactory } from '@utils/settings.utils';
 
 /**

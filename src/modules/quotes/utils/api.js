@@ -1,8 +1,8 @@
 import fetchJsonp from 'fetch-jsonp';
 import { toUrl } from '@utils/url.utils';
 import * as StorageUtils from '@utils/storage.utils';
-import apiConfigs from './configs/api.config';
-import cacheConfigs from './configs/cache.config';
+import apiConfigs from '../configs/api.config';
+import cacheConfigs from '../configs/cache.config';
 
 const randomQuoteApiUrl = apiConfigs.base;
 const randomQuoteCacheKey = cacheConfigs.randomQuotes;
