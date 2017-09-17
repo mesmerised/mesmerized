@@ -4,3 +4,13 @@ body {
     font-family: sans-serif;
     color: #fff;
 }
+
+.controlIcon {
+    display: inline-block;
+    opacity: 0.4;
+    transition: opacity 0.8s;
+
+    &:hover, &:active {
+        opacity: 1;
+    }
+}
