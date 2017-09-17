@@ -1,13 +1,19 @@
 import React, { Component } from 'react';
 import ClockComponent from '../components/Clock';
-import Settings from '../utils/settings';
+import Store from '../utils/store';
 
 class Clock extends Component {
-    state = {
-        is12hours: Settings.tewelveHourFormat,
-        blinkForSeconds: Settings.blinkForSeconds,
-        showClock: Settings.showClock,
-    };
+    state = Store.state;
+
+    componentWillMount() {
+        this.unsubscribe = Store.subscribe(newState => {
+            this.setState(newState);
+        });
+    }
+
+    componentWillUnmount() {
+        this.unsubscribe();
+    }
 
     render() {
         const { is12hours, blinkForSeconds, showClock } = this.state;
