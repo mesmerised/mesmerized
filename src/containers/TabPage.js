@@ -6,6 +6,7 @@ import { Container as QuotesContainer } from '@modules/quotes';
 import { Container as ClockContainer } from '@modules/clock';
 import { Container as WeatherContainer } from '@modules/weather';
 import SettingsIcon from '@components/SettingsIcon';
+import RefreshIcon from '@components/RefreshIcon';
 import './TabPage.css';
 
 class TabPage extends Component {
@@ -16,6 +17,7 @@ class TabPage extends Component {
                 <Panel>
                     <div className="panel">
                         <div className="panel__topContainer panel__topContainer_right">
+                            <RefreshIcon />
                             <SettingsIcon />
                         </div>
                         <div className="panel__topContainer panel__topContainer_left">
