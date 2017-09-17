@@ -6,8 +6,8 @@ import ListDivider from 'react-toolbox/lib/list/ListDivider';
 import * as Modules from '@modules';
 import './Settings.css';
 
-const settingsContainersKeys = Object.keys(Modules);
-const settingsContainersKeysLastIndex = settingsContainersKeys.length - 1;
+const moduleKeys = Object.keys(Modules);
+const moduleKeysLastIndex = moduleKeys.length - 1;
 
 
 // iterate and generate an array of module settings
@@ -20,12 +20,12 @@ const settingsContainersKeysLastIndex = settingsContainersKeys.length - 1;
 //      <ListDivider />
 //      <QuotesSettings />
 //  ]
-const settingsContainerItems = settingsContainersKeys.reduce((arr, m, index) => {
+const settingsContainerItems = moduleKeys.reduce((arr, m, index) => {
     const module = Modules[m];
     const SettingsContainer = module.Settings;
 
     SettingsContainer && arr.push(<SettingsContainer key={ index } />);
-    if (index !== settingsContainersKeysLastIndex) {
+    if (index !== moduleKeysLastIndex) {
         const dividerKey = `${index}-divider`;
         arr.push(<ListDivider key={ dividerKey } />);
     }
