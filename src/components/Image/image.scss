@@ -1,6 +1,6 @@
 .image {
     opacity: 1;
-    transition: opacity 0.3s;
+    transition: opacity 1s ease;
 
     &__loading {
         opacity: 0;
