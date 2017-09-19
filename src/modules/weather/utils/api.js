@@ -51,7 +51,7 @@ export function getWeatherForLocation({ longitude, latitude, refreshInterval = 0
 
     const prefetchedWeather = StorageUtils.get(prefetchedWeatherCacheKey);
 
-    if (prefetchedWeather) {
+    if (prefetchedWeather && Object.keys(prefetchedWeather).length) {
         const { coord = {}, dt } = prefetchedWeather;
         let { lon, lat } = coord;
         const lastUpdateTime = new Date(dt*1000).getTime();
