@@ -3,8 +3,8 @@ import './style.css'
 
 const imageBaseUrl = 'https://openweathermap.org/img/w';
 
-const Weather = ({ temperature, cityName, iconId }) => (
-    <div className="weather">
+const Weather = ({ temperature, cityName, iconId, isLoading }) => (
+    <div className={ isLoading ? "weather weather__loading" : "weather" }>
         { temperature &&
             <div className="weather__temperature">{ Math.round(temperature) }</div>
         }

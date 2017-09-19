@@ -25,6 +25,7 @@ class Weather extends Component {
         unit: Settings.unit,
         refreshInterval: Settings.refreshInterval,
         showWeather: Settings.showWeather,
+        isLoading: true,
     };
 
     // @todo: handle geolocation errors
@@ -73,12 +74,24 @@ class Weather extends Component {
             temperature = unit === METRIC.FAHRENHEIT ?
                 toFahrenheit(temp) : toCelsius(temp);
         }
-        this.setState({temperature, cityName: name, iconId: icon});
+
+        this.setState({
+            temperature,
+            isLoading: false,
+            cityName: name,
+            iconId: icon
+        });
     };
 
     render() {
-        const { temperature, cityName, iconId, showWeather } = this.state;
-        const props = { temperature, cityName, iconId };
+        const {
+            temperature,
+            cityName,
+            iconId,
+            showWeather,
+            isLoading
+        } = this.state;
+        const props = { temperature, cityName, iconId, isLoading };
 
         if (!showWeather) return null;
 
