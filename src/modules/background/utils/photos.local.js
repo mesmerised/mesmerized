@@ -3,7 +3,6 @@ import * as StorageUtils from '@utils/storage.utils';
 import cacheConfigs from '../configs/cache.config';
 import categoriesConfig from '../configs/categories.config';
 
-const categoriesBasePath = '../images/categories';
 const localPhotosCacheKey = cacheConfigs.localPhotos;
 
 /**
@@ -30,12 +29,16 @@ const categories = Object.keys(categoriesConfig);
 // to indicate they are available for the next usage
 // storage format -> { 'local/path/to/photo' : {photo_json} }
 !getLocalPhotosFromCache() && categories.forEach(c => {
-    import(`${categoriesBasePath}/${c}.json`)
+    // @todo: Investigate
+    // cannot store ../images/categories as a variable
+    // as the base path would not be identified by
+    // webpack for some reason and import would fail
+    import(`../images/categories/${c}.json`)
         .then(photos => {
             photos.forEach(p => {
-                import(`${categoriesBasePath}/${c}/${p.id}.jpg`)
+                import(`../images/categories/${c}/${p.id}.jpg`)
                     .then(path => StorageUtils.update(localPhotosCacheKey, {[path]: p}))
-                    .catch(error => error)
+                    .catch(error => error);
             });
         }).catch(error => error);
 });
