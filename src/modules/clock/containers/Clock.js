@@ -3,8 +3,8 @@ import ClockComponent from '../components/Clock';
 import { connect } from '@utils/connect.utils';
 import store from '../utils/store';
 
-function ClockContainer({is12hours, blinkForSeconds, showClock}) {
-    const props = { is12hours, blinkForSeconds };
+function ClockContainer({is12hours, blinkForSeconds, showDate, showClock}) {
+    const props = { is12hours, blinkForSeconds, showDate };
     return (
         showClock && <ClockComponent { ...props } />
     );

@@ -9,6 +9,7 @@ const defaults = {
     showClock: true,
     tewelveHourFormat: false,
     blinkForSeconds: false,
+    showDate: true,
 }
 
 export default settingsFactory({ configs, defaults });

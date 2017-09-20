@@ -9,11 +9,17 @@ class SettingsContainer extends Component {
         showClock: Settings.showClock,
         tewelveHourFormat: Settings.tewelveHourFormat,
         blinkForSeconds: Settings.blinkForSeconds,
+        showDate: Settings.showDate,
     };
 
     handleShowClockChange = (value, ev) => {
         Settings.showClock = value;
         this.setState({showClock : value});
+    };
+
+    handleShowDateChange = (value, ev) => {
+        Settings.showDate = value;
+        this.setState({showDate : value});
     };
 
     handleHourFormatChange = (value, ev) => {
@@ -27,16 +33,27 @@ class SettingsContainer extends Component {
     };
 
     render() {
-        const { showClock, tewelveHourFormat, blinkForSeconds } = this.state;
+        const {
+            showClock,
+            showDate,
+            tewelveHourFormat,
+            blinkForSeconds
+        } = this.state;
 
         return (
             <List selectable ripple>
                 <ListSubHeader caption="Clock" />
                 <ListCheckbox
-                    caption="Show Clock"
-                    legend="Show the clock in the center of the screen."
+                    caption="Clock"
+                    legend="Show the clock with date in the center of the screen."
                     checked={ showClock }
                     onChange={ this.handleShowClockChange } />
+                <ListCheckbox
+                    caption="Show Date"
+                    legend="Show the date below the clock."
+                    checked={ showDate }
+                    disabled={ !showClock }
+                    onChange={ this.handleShowDateChange } />
                 <ListCheckbox
                     caption="12hr"
                     legend="Show the 12 hour format for the clock."

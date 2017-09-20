@@ -9,11 +9,13 @@ class Clock extends Component {
     static defaultProps = {
         is12hours: false,
         blinkForSeconds: false,
+        showDate: true,
     };
 
     state = {
+        date: new Date(),
         hours: 0,
-        minutes: 0
+        minutes: 0,
     };
 
     updateTime = () => {
@@ -21,7 +23,7 @@ class Clock extends Component {
         const hours = date.getHours();
         const minutes = date.getMinutes();
 
-        this.setState({hours, minutes});
+        this.setState({hours, minutes, date});
     };
 
     componentDidMount() {
@@ -34,8 +36,8 @@ class Clock extends Component {
     }
 
     render() {
-        let { hours, minutes } = this.state;
-        const { is12hours, blinkForSeconds } = this.props;
+        let { hours, minutes, date } = this.state;
+        const { is12hours, blinkForSeconds, showDate } = this.props;
 
         if (is12hours && hours > TEWELVE_HRS) {
             hours = hours - TEWELVE_HRS;
@@ -51,6 +53,9 @@ class Clock extends Component {
             <div className={ clockClass }>
                 <div className="clock__hours">{ hours }</div>
                 <div className="clock__minutes">{ minutes }</div>
+                { showDate &&
+                    <div className="clock__date">{ date.toDateString() }</div>
+                }
             </div>
         );
     }
