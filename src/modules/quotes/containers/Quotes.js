@@ -1,35 +1,17 @@
 import React, { Component } from 'react';
 import QuotesComponent from '../components/Quote';
-import { prefetchRandomQuote, getRandomPrefetchedQuote } from '../utils/api';
-import { getRandomLocalQuote } from '../utils/quotes.local';
-import Settings from '../utils/settings';
-
-let quoteObject;
-
-// if allowed to fetch from server
-// begin with assuming we have a
-// prefetched quote from the api
-if (Settings.fetchFromServer) {
-    quoteObject = getRandomPrefetchedQuote();
-}
-
-// fallback to the locally stored quote
-quoteObject = quoteObject || getRandomLocalQuote();
+import { prefetchRandomQuote } from '../utils/api';
+import { connect } from '@utils/connect.utils';
+import store from '../utils/store';
 
 class Quotes extends Component {
-    state = {
-        fetchFromServer: Settings.fetchFromServer,
-        showQuotes: Settings.showQuotes,
-        quote: quoteObject,
-    };
-
     componentDidMount() {
-        const { fetchFromServer } = this.state;
+        const { fetchFromServer } = this.props;
         fetchFromServer && prefetchRandomQuote();
     }
 
     render() {
-        const { showQuotes, quote = {} } = this.state;
+        const { showQuotes, quote = {} } = this.props;
 
         const author  = quote.quoteAuthor || 'Anonymous';
         const text = quote.quoteText;
@@ -41,4 +23,4 @@ class Quotes extends Component {
     }
 }
 
-export default Quotes;
+export default connect(store)(Quotes);
