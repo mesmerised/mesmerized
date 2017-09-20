@@ -7,6 +7,7 @@ class FullScreenImage extends Component {
         return (
             <div className="background">
                 <Image
+                    key={ this.props.src }
                     extraClasses="background__image"
                     {...this.props} />
                 <div className="background__overlay" />
