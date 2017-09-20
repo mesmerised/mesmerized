@@ -37,7 +37,7 @@ export function fetchRandomQuote(params = {}) {
 /**
  * Fetch and store quotes in the cache
  */
-export function prefetchRandomQuote() {
+export async function prefetchRandomQuote() {
     const prefetchedQuotes = StorageUtils.get(randomQuoteCacheKey);
     const exisitngPrefetchedQuotesCount = prefetchedQuotes
         && Object.keys(prefetchedQuotes).length;
@@ -48,11 +48,10 @@ export function prefetchRandomQuote() {
     // call random quote api
     // then store the quote object in the cache
     // { [quote id] : { quote object }, ... }
-    fetchRandomQuote().then(quote => {
-        if (!quote || !quote.quoteText) return;
-        const id = quote.quoteLink;
-        StorageUtils.update(randomQuoteCacheKey, {[id]: quote});
-    });
+    const quote = await fetchRandomQuote();
+    if (!quote || !quote.quoteText) return;
+    const id = quote.quoteLink;
+    StorageUtils.update(randomQuoteCacheKey, {[id]: quote});
 }
 
 /**

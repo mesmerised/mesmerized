@@ -49,7 +49,7 @@ class Weather extends Component {
         this.wpid && navigator.geolocation.clearWatch(this.wpid);
     }
 
-    handleGeolocationUpdate = position => {
+    handleGeolocationUpdate = async position => {
         const { coords = {} } = position;
         const { latitude, longitude } = coords;
 
@@ -58,9 +58,16 @@ class Weather extends Component {
             { coords: { latitude, longitude } });
 
         const { refreshInterval } = this.state;
-        // @todo: handle errors
-        getWeatherForLocation({latitude, longitude, refreshInterval})
-            .then(this.handleDataUpdate).catch(x => x);
+
+        try {
+            const data = await getWeatherForLocation(
+                {latitude, longitude, refreshInterval});
+            this.handleDataUpdate(data);
+        } catch(ex) {
+            // do nothing on weather update failure
+            // the state would not change and
+            // the weather module would not show up
+        }
     };
 
     handleDataUpdate = (data = {}) => {

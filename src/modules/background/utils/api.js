@@ -52,7 +52,7 @@ export function fetchRandomPhotos(params = {}) {
  *
  * @todo: configurable categories option
  */
-export function prefetchRandomPhotos() {
+export async function prefetchRandomPhotos() {
     const prefetchedPhotos = StorageUtils.get(prefetchedPhotoCacheKey);
     const exisitngPrefetchedPhotosCount = prefetchedPhotos
         && Object.keys(prefetchedPhotos).length;
@@ -64,13 +64,15 @@ export function prefetchRandomPhotos() {
     // then use image prefetch technique to prefetch the photo url
     // then store each prefetched photo object in the cache
     // { [photo id] : { photo object }, ... }
-    fetchRandomPhotos().then(photos => {
-        photos.forEach(p => {
-            const url = getPhotoUrl(p);
-            prefetchImage(url)
-                .then(img => StorageUtils.update(prefetchedPhotoCacheKey, {[p.id]: p}))
-                .catch(img => img)
-        });
+    const photos = await fetchRandomPhotos();
+    photos.forEach(async photo => {
+        const url = getPhotoUrl(photo);
+        try {
+            await prefetchImage(url);
+            StorageUtils.update(prefetchedPhotoCacheKey, {[photo.id]: photo});
+        } catch(ex) {
+            // do nothing on image prefetch failure
+        }
     });
 }
 
