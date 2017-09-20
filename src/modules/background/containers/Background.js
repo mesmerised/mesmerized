@@ -1,42 +1,33 @@
 import React, { Component } from 'react';
 import FullscreenImage from '../components/FullscreenImage';
 import placeholderImage from '../images/placeholder.jpeg';
-import { getPhotoUrl, getRandomPrefetchedPhoto, prefetchRandomPhotos } from '../utils/api';
-import { getLocalPhotoPath, getRandomLocalPhoto } from '../utils/photos.local';
-import Settings from '../utils/settings';
-
-let photoUrl;
-
-// if allowed to fetch from server
-// begin with assuming we get a
-// prefetched photo from the api
-if (Settings.fetchFromServer) {
-    photoUrl = getPhotoUrl(getRandomPrefetchedPhoto());
-}
-
-// prefetched api photo
-// or a locally stored photo
-// or a fallback placeholder photo
-photoUrl = photoUrl
-    || getLocalPhotoPath(getRandomLocalPhoto())
-    || placeholderImage;
+import { prefetchRandomPhotos } from '../utils/api';
+import { connect } from '@utils/connect.utils';
+import store from '../utils/store';
 
 // @todo: update api credits
 
 class Background extends Component {
+    static defaultProps = {
+        photoUrl: placeholderImage,
+        timeout: 1500,
+    };
+
     componentDidMount() {
+        const { fetchFromServer } = this.props;
         // start prefetching if configured in settings
-        Settings.fetchFromServer && prefetchRandomPhotos();
+        fetchFromServer && prefetchRandomPhotos();
     }
 
     render() {
+        const { photoUrl, timeout } = this.props;
         return (
             <FullscreenImage
                 src={ photoUrl }
                 placeholder={ placeholderImage }
-                timeout={ 1500 } />
+                timeout={ timeout } />
         );
     }
 }
 
-export default Background;
+export default connect(store)(Background);
