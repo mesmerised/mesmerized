@@ -1,4 +1,4 @@
-import store, { getSettingsObject } from '../utils/store';
+import store, { getSettingsObject } from './store';
 
 export const refresh = () =>
     store.state = {...store.state, ...getSettingsObject()};
