@@ -69,11 +69,11 @@ export function getRandomPrefetchedQuote() {
         return;
     }
 
-    // there is at least one unused photo, pick the first one
+    // there is at least one unused quote, pick the first one
     const prefetchedQuotesIds = Object.keys(prefetchedQuotes);
     const selectedId = prefetchedQuotesIds[0];
     const unusedQuote = prefetchedQuotes[selectedId];
-    // delete from cache and return the photo
+    // delete from cache and return the quote object
     delete prefetchedQuotes[selectedId];
     StorageUtils.set(randomQuoteCacheKey, prefetchedQuotes);
     return unusedQuote;

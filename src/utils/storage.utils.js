@@ -76,6 +76,11 @@ export function update(key, val) {
     }
 }
 
+/**
+ * Removes the given key(s) from the `localStorage`.
+ *
+ * @param  {String|Array<String>} keys  Key(s) to remove from storage
+ */
 export function remove(keys) {
     if (!Array.isArray(keys)) keys = [keys];
     keys.forEach(k => localStorage.removeItem(getKey(k)));
