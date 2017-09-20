@@ -44,7 +44,7 @@ class SettingsContainer extends Component {
             <List selectable ripple>
                 <ListSubHeader caption="Clock" />
                 <ListCheckbox
-                    caption="Clock"
+                    caption="Show Clock"
                     legend="Show the clock with date in the center of the screen."
                     checked={ showClock }
                     onChange={ this.handleShowClockChange } />
