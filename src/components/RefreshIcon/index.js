@@ -17,9 +17,10 @@ const refreshFunctions = moduleKeys.reduce((arr, m) => {
 const refreshModules = () => refreshFunctions.forEach(fn => fn());
 
 const RefreshIcon = () => (
-    <div className="controlIcon">
+    <div className="control__icon">
         <IconButton
             icon="refresh"
+            inverse={ true }
             onClick={ refreshModules } />
     </div>
 );

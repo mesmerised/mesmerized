@@ -17,8 +17,10 @@ class TabPage extends Component {
                 <Panel>
                     <div className="panel">
                         <div className="panel__topContainer panel__topContainer_right">
-                            <RefreshIcon />
-                            <SettingsIcon />
+                            <div className="control">
+                                <RefreshIcon />
+                                <SettingsIcon />
+                            </div>
                         </div>
                         <div className="panel__topContainer panel__topContainer_left">
                             <WeatherContainer />

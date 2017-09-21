@@ -25,3 +25,22 @@
         width: 100%;
     }
 }
+
+.control {
+    background-color: rgba(0, 0, 0, 0.2);
+    transition: background-color 1s;
+
+    &:hover {
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    &__icon {
+        display: inline-block;
+        opacity: 0.4;
+        transition: opacity 0.8s;
+
+        &:hover, &:active {
+            opacity: 1;
+        }
+    }
+}

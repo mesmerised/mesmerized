@@ -5,13 +5,3 @@ body {
     padding: 0;
     color: #fff;
 }
-
-.controlIcon {
-    display: inline-block;
-    opacity: 0.4;
-    transition: opacity 0.8s;
-
-    &:hover, &:active {
-        opacity: 1;
-    }
-}
