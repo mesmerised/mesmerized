@@ -1,43 +1,23 @@
 import React, { Component } from 'react';
 import WeatherComponent from '../components/Weather';
-import { getWeatherForLocation } from '../utils/api';
-import { toCelsius, toFahrenheit } from '@utils/general.utils';
-import * as StorageUtils from '@utils/storage.utils';
-import { METRIC } from '../configs/constants';
-import cacheConfigs from '../configs/cache.config';
-import Settings from '../utils/settings';
+import { connect } from '@utils/connect.utils';
+import store from '../utils/store';
+import * as Actions from '../utils/actions';
 
-const lastPositionCacheKey = cacheConfigs.lastPosition;
 const GEO_OPTIONS = { enableHighAccuracy: true };
-
-// call the handler if there is an existing position in the cache
-function handleGeolocationUpdateForLastFetchedPosition(context) {
-    const lastPosition = StorageUtils.get(lastPositionCacheKey);
-    lastPosition && Object.entries(lastPosition).length
-        && context.handleGeolocationUpdate(lastPosition);
-}
+const cacheEnabled = true;
 
 class Weather extends Component {
-    state = {
-        temperature: 0,
-        cityName: '',
-        iconId: '',
-        unit: Settings.unit,
-        refreshInterval: Settings.refreshInterval,
-        showWeather: Settings.showWeather,
-        isLoading: true,
-    };
-
     // @todo: handle geolocation errors
     componentDidMount() {
-        const { refreshInterval } = this.state;
+        const { refreshInterval } = this.props;
 
         // initialize the initial update
-        handleGeolocationUpdateForLastFetchedPosition(this);
+        Actions.refresh({cacheEnabled});
 
         // update in the given intervals
         this.intervalId = setInterval(() =>
-            handleGeolocationUpdateForLastFetchedPosition(this), refreshInterval);
+            Actions.refresh({cacheEnabled}), refreshInterval);
 
         // listen to any geolocation updates
         this.wpid = navigator.geolocation.watchPosition(
@@ -49,45 +29,9 @@ class Weather extends Component {
         this.wpid && navigator.geolocation.clearWatch(this.wpid);
     }
 
-    handleGeolocationUpdate = async position => {
-        const { coords = {} } = position;
-        const { latitude, longitude } = coords;
-
-        // cache last position update
-        StorageUtils.set(lastPositionCacheKey,
-            { coords: { latitude, longitude } });
-
-        const { refreshInterval } = this.state;
-
-        try {
-            const data = await getWeatherForLocation(
-                {latitude, longitude, refreshInterval});
-            this.handleDataUpdate(data);
-        } catch(ex) {
-            // do nothing on weather update failure
-            // the state would not change and
-            // the weather module would not show up
-        }
-    };
-
-    handleDataUpdate = (data = {}) => {
-        const { main = {}, weather = [], name = '' } = data;
-        const { temp } = main;
-        const { icon } = weather[0];
-        const { unit } = this.state;
-        let temperature;
-
-        if (temp) {
-            temperature = unit === METRIC.FAHRENHEIT ?
-                toFahrenheit(temp) : toCelsius(temp);
-        }
-
-        this.setState({
-            temperature,
-            isLoading: false,
-            cityName: name,
-            iconId: icon
-        });
+    handleGeolocationUpdate = position => {
+        Actions.updatePosition({position});
+        Actions.refresh({cacheEnabled});
     };
 
     render() {
@@ -97,15 +41,13 @@ class Weather extends Component {
             iconId,
             showWeather,
             isLoading
-        } = this.state;
-        const props = { temperature, cityName, iconId, isLoading };
+        } = this.props;
 
         if (!showWeather) return null;
 
-        return (
-            temperature ? <WeatherComponent { ...props } /> : null
-        );
+        const props = { temperature, cityName, iconId, isLoading };
+        return <WeatherComponent { ...props } />;
     }
 }
 
-export default Weather;
+export default connect(store)(Weather);
