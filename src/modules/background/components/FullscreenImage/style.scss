@@ -5,6 +5,9 @@
     width: 200%;
     height: 200%;
     z-index: -1;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: scroll;
 
     &__image, &__overlay {
         position: absolute;

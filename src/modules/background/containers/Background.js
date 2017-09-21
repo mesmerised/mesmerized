@@ -20,9 +20,11 @@ class Background extends Component {
     }
 
     render() {
-        const { photoUrl, timeout } = this.props;
+        const { photoUrl, timeout, previousPhotoUrl } = this.props;
+        const backgroundImage = previousPhotoUrl ? `url(${previousPhotoUrl})` : 'none';
         return (
             <FullscreenImage
+                style={ { backgroundImage } }
                 src={ photoUrl }
                 placeholder={ placeholderImage }
                 timeout={ timeout } />
