@@ -1,5 +1,5 @@
 import Container from './containers/Background';
 import Settings from './containers/Settings';
-import { refresh } from './utils/actions';
+import * as Actions from './utils/actions';
 
-export { Container, Settings, refresh };
+export { Container, Settings, Actions };

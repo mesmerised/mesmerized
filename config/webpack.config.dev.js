@@ -106,6 +106,7 @@ module.exports = {
       '@components': resolve(`${paths.appSrc}/components`),
       '@modules': resolve(`${paths.appSrc}/modules`),
       '@utils': resolve(`${paths.appSrc}/utils`),
+      '@actions': resolve(`${paths.appSrc}/actions`),
     },
     plugins: [
       // Prevents users from importing files from outside of src/ (or node_modules/).
