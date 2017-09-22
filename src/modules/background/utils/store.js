@@ -22,7 +22,11 @@ export const getStateObject = () => {
         || getLocalPhotoPath(getRandomLocalPhoto())
         || placeholderImage;
 
-    return { fetchFromServer, photoUrl };
+    // get a random image as placeholder
+    // to handle offline network scenarios
+    const placeholderPhotoUrl = getLocalPhotoPath(getRandomLocalPhoto());
+
+    return { fetchFromServer, photoUrl, placeholderPhotoUrl };
 };
 
 export default createStore(getStateObject());;
