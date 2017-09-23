@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import WeatherComponent from '../components/Weather';
-import { connect } from '@utils/connect.utils';
-import store from '../utils/store';
 import * as Actions from '../utils/actions';
+import ConnectedStoreHOC from '../utils/connect.store.hoc';
 
 const GEO_OPTIONS = { enableHighAccuracy: true };
 const cacheEnabled = true;
@@ -50,4 +49,4 @@ class Weather extends Component {
     }
 }
 
-export default connect(store)(Weather);
+export default ConnectedStoreHOC(Weather);

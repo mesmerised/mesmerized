@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import List from 'react-toolbox/lib/list/List';
 import ListSubHeader from 'react-toolbox/lib/list/ListSubHeader';
 import ListCheckbox from 'react-toolbox/lib/list/ListCheckbox';
@@ -7,7 +7,8 @@ import RadioGroup from 'react-toolbox/lib/radio/RadioGroup';
 import RadioButton from 'react-toolbox/lib/radio/RadioButton';
 import Dropdown from 'react-toolbox/lib/dropdown/Dropdown';
 import { METRIC } from '../configs/constants';
-import Settings from '../utils/settings';
+import ConnectedStoreHOC from '../utils/connect.store.hoc';
+import { setSetting } from '../utils/actions';
 
 const REFRESH_INTERVALS = [
     { value: 30*60*1000, label: '30 mins' },
@@ -16,77 +17,67 @@ const REFRESH_INTERVALS = [
     { value: 120*60*1000, label: '2 hrs' },
 ];
 
-class SettingsContainer extends Component {
-    state = {
-        showWeather: Settings.showWeather,
-        unit: Settings.unit,
-        refreshInterval: Settings.refreshInterval,
-    };
+const handleShowChange = (value, ev) =>
+    setSetting({showWeather : value});
 
-    handleShowChange = (value, ev) => {
-        Settings.showWeather = value;
-        this.setState({showWeather : value});
-    };
+const handleUnitChange = (value, ev) =>
+    setSetting({unit : value});
 
-    handleUnitChange = (value, ev) => {
-        Settings.unit = value;
-        this.setState({unit : value});
-    };
+const handleRefreshIntervallChange = (value, ev) =>
+    setSetting({refreshInterval : parseInt(value, 10)});
 
-    handleRefreshIntervallChange = (value, ev) => {
-        Settings.refreshInterval = parseInt(value, 10);
-        this.setState({refreshInterval : value});
-    };
+const UnitsComponent = ({ unit, showWeather }) => (
+    <RadioGroup
+        value={ unit }
+        disabled={ !showWeather }
+        onChange={ handleUnitChange } >
 
-    render() {
-        const { showWeather, unit, refreshInterval } = this.state;
+        <RadioButton
+            className="settings__inlineItem"
+            label="Celsius"
+            value={ METRIC.CELSIUS } />
+        <RadioButton
+            className="settings__inlineItem"
+            label="Fahrenheit"
+            value={ METRIC.FAHRENHEIT } />
 
-        const unitsComponent = (
-            <RadioGroup
-                value={ unit }
-                disabled={ !showWeather }
-                onChange={ this.handleUnitChange } >
+    </RadioGroup>
+);
 
-                <RadioButton
-                    className="settings__inlineItem"
-                    label="Celsius"
-                    value={ METRIC.CELSIUS } />
-                <RadioButton
-                    className="settings__inlineItem"
-                    label="Fahrenheit"
-                    value={ METRIC.FAHRENHEIT } />
+const RefreshIntervalDropdown = ({ refreshInterval, showWeather }) => (
+    <Dropdown
+        label="Refresh Interval"
+        value={ refreshInterval }
+        source={ REFRESH_INTERVALS }
+        disabled={ !showWeather }
+        onChange={ handleRefreshIntervallChange } />
+);
 
-            </RadioGroup>
-        );
+const SettingsContainer = ({ showWeather, unit, refreshInterval }) => (
+    <List selectable ripple>
+        <ListSubHeader caption="Weather" />
+        <ListCheckbox
+            caption="Show Weather"
+            legend="Show the weather widget."
+            checked={ showWeather }
+            onChange={ handleShowChange } />
+        <ListItem
+            itemContent={
+                <RefreshIntervalDropdown
+                    refreshInterval={ refreshInterval }
+                    showWeather={ showWeather } />
+                }
+            ripple={ false }
+            selectable={ false } />
+        <ListItem
+            itemContent={
+                <UnitsComponent
+                    unit={ unit }
+                    showWeather={ showWeather } />
+                }
+            ripple={ false }
+            selectable={ false } />
+    </List>
+);
 
-        const refreshIntervalDropdown = (
-            <Dropdown
-                label="Refresh Interval"
-                value={ refreshInterval }
-                source={ REFRESH_INTERVALS }
-                disabled={ !showWeather }
-                onChange={ this.handleRefreshIntervallChange } />
-        );
-
-        return (
-            <List selectable ripple>
-                <ListSubHeader caption="Weather" />
-                <ListCheckbox
-                    caption="Show Weather"
-                    legend="Show the weather widget."
-                    checked={ showWeather }
-                    onChange={ this.handleShowChange } />
-                <ListItem
-                    itemContent={ refreshIntervalDropdown }
-                    ripple={ false }
-                    selectable={ false } />
-                <ListItem
-                    itemContent={ unitsComponent }
-                    ripple={ false }
-                    selectable={ false } />
-            </List>
-        );
-    }
-}
-
-export default SettingsContainer;
+export default ConnectedStoreHOC(SettingsContainer);

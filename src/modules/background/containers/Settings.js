@@ -1,33 +1,22 @@
-import React, { Component } from 'react';
+import React from 'react';
 import List from 'react-toolbox/lib/list/List';
 import ListSubHeader from 'react-toolbox/lib/list/ListSubHeader';
 import ListCheckbox from 'react-toolbox/lib/list/ListCheckbox';
-import Settings from '../utils/settings';
+import ConnectedStoreHOC from '../utils/connect.store.hoc';
+import { setSetting } from '../utils/actions';
 
-class SettingsContainer extends Component {
-    state = {
-        fetchFromServer: Settings.fetchFromServer
-    };
+const handleFetchFromServerChange = (value, ev) =>
+    setSetting({fetchFromServer: value});
 
-    handleChange = (value, ev) => {
-        Settings.fetchFromServer = value;
-        this.setState({fetchFromServer : value});
-    };
+const SettingsContainer = ({ fetchFromServer }) => (
+    <List selectable ripple>
+        <ListSubHeader caption="Background Photos" />
+        <ListCheckbox
+            caption="Load Fresh"
+            legend="If disabled, it will cycle through a list of locally stored wallpapers only."
+            checked={ fetchFromServer }
+            onChange={ handleFetchFromServerChange } />
+    </List>
+);
 
-    render() {
-        const { fetchFromServer } = this.state;
-
-        return (
-            <List selectable ripple>
-                <ListSubHeader caption="Background Photos" />
-                <ListCheckbox
-                    caption="Load Fresh"
-                    legend="If disabled, it will cycle through a list of locally stored wallpapers only."
-                    checked={ fetchFromServer }
-                    onChange={ this.handleChange } />
-            </List>
-        );
-    }
-}
-
-export default SettingsContainer;
+export default ConnectedStoreHOC(SettingsContainer);

@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import FullscreenImage from '../components/FullscreenImage';
 import placeholderImage from '../images/placeholder.jpeg';
 import { prefetchRandomPhotos } from '../utils/api';
-import { connect } from '@utils/connect.utils';
-import store from '../utils/store';
+import ConnectedStoreHOC from '../utils/connect.store.hoc';
 
 // @todo: update api credits
 
@@ -37,4 +36,4 @@ class Background extends Component {
     }
 }
 
-export default connect(store)(Background);
+export default ConnectedStoreHOC(Background);

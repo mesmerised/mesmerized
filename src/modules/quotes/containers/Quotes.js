@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import QuotesComponent from '../components/Quote';
 import { prefetchRandomQuote } from '../utils/api';
-import { connect } from '@utils/connect.utils';
-import store from '../utils/store';
+import ConnectedStoreHOC from '../utils/connect.store.hoc';
 
 class Quotes extends Component {
     componentDidMount() {
@@ -23,4 +22,4 @@ class Quotes extends Component {
     }
 }
 
-export default connect(store)(Quotes);
+export default ConnectedStoreHOC(Quotes);

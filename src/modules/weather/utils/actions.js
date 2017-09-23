@@ -4,6 +4,8 @@ import { METRIC } from '../configs/constants';
 import { toCelsius, toFahrenheit } from '@utils/general.utils';
 import store, { getSettingsObject } from './store';
 import { getWeatherForLocation } from '../utils/api';
+import Settings from './settings';
+import { setSettingByStoreAndSettings } from '@actions/settings';
 
 export function updatePosition(payload = {}) {
     let { position = {} } = payload;
@@ -75,3 +77,6 @@ export async function refresh(payload = {}) {
         // the weather module would not show up
     }
 }
+
+export const setSetting = (payload = {}) =>
+    setSettingByStoreAndSettings({data: payload, store, Settings});

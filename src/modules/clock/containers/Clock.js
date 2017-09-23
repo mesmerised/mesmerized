@@ -1,7 +1,6 @@
 import React from 'react';
 import ClockComponent from '../components/Clock';
-import { connect } from '@utils/connect.utils';
-import store from '../utils/store';
+import ConnectedStoreHOC from '../utils/connect.store.hoc';
 
 function ClockContainer({is12hours, blinkForSeconds, showDate, showClock}) {
     const props = { is12hours, blinkForSeconds, showDate };
@@ -10,4 +9,4 @@ function ClockContainer({is12hours, blinkForSeconds, showDate, showClock}) {
     );
 }
 
-export default connect(store)(ClockContainer);
+export default ConnectedStoreHOC(ClockContainer);

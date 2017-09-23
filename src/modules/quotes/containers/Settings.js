@@ -1,45 +1,31 @@
-import React, { Component } from 'react';
+import React from 'react';
 import List from 'react-toolbox/lib/list/List';
 import ListSubHeader from 'react-toolbox/lib/list/ListSubHeader';
 import ListCheckbox from 'react-toolbox/lib/list/ListCheckbox';
-import Settings from '../utils/settings';
+import ConnectedStoreHOC from '../utils/connect.store.hoc';
+import { setSetting } from '../utils/actions';
 
-class SettingsContainer extends Component {
-    state = {
-        showQuotes: Settings.showQuotes,
-        fetchFromServer: Settings.fetchFromServer,
-    };
+const handleShowChange = (value, ev) =>
+    setSetting({showQuotes : value});
 
-    handleShowChange = (value, ev) => {
-        Settings.showQuotes = value;
-        this.setState({showQuotes : value});
-    };
+const handleFetchFromServerChange = (value, ev) =>
+    setSetting({fetchFromServer : value});
 
-    handleFetchFromServerChange = (value, ev) => {
-        Settings.fetchFromServer = value;
-        this.setState({fetchFromServer : value});
-    };
+const SettingsContainer = ({ showQuotes, fetchFromServer }) => (
+    <List selectable ripple>
+        <ListSubHeader caption="Quotes" />
+        <ListCheckbox
+            caption="Show Quotes"
+            legend="Show curated list of inspirational quotes."
+            checked={ showQuotes }
+            onChange={ handleShowChange } />
+        <ListCheckbox
+            caption="Load Fresh"
+            legend="If disabled, it will cycle through a list of locally stored quotes only."
+            checked={ fetchFromServer }
+            disabled={ !showQuotes }
+            onChange={ handleFetchFromServerChange } />
+    </List>
+);
 
-    render() {
-        const { showQuotes, fetchFromServer } = this.state;
-
-        return (
-            <List selectable ripple>
-                <ListSubHeader caption="Quotes" />
-                <ListCheckbox
-                    caption="Show Quotes"
-                    legend="Show curated list of inspirational quotes."
-                    checked={ showQuotes }
-                    onChange={ this.handleShowChange } />
-                <ListCheckbox
-                    caption="Load Fresh"
-                    legend="If disabled, it will cycle through a list of locally stored quotes only."
-                    checked={ fetchFromServer }
-                    disabled={ !showQuotes }
-                    onChange={ this.handleFetchFromServerChange } />
-            </List>
-        );
-    }
-}
-
-export default SettingsContainer;
+export default ConnectedStoreHOC(SettingsContainer);
