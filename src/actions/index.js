@@ -1,7 +1,8 @@
-import { refreshModules } from './refresh';
+import { refreshModules, toggleTodoListVisibility } from './modules';
 import { openSettingsPage } from './settings';
 
 export {
     refreshModules,
+    toggleTodoListVisibility,
     openSettingsPage,
 }

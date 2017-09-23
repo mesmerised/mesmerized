@@ -1,3 +1,7 @@
+body {
+    overflow: hidden;
+}
+
 .panel {
     height: 100vh;
 
@@ -24,6 +28,13 @@
         bottom: 0px;
         width: 100%;
     }
+
+    &__draggableContainer {
+        position: absolute;
+        top: 60px;
+        right: 20px;
+        z-index: 2;
+    }
 }
 
 .control {
@@ -42,5 +53,13 @@
         &:hover, &:active {
             opacity: 1;
         }
+    }
+}
+
+.react-draggable {
+    transition: opacity 0.4s;
+
+    &.react-draggable-dragging {
+        opacity: 0.4;
     }
 }

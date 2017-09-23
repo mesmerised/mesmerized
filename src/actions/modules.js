@@ -13,5 +13,12 @@ const refreshFunctions = moduleKeys.reduce((arr, m) => {
     return arr;
 }, []);
 
+const { TodoList: TodoListModule = {} } = Modules;
+const { Actions: TodoListModuleActions = {} } = TodoListModule;
+const { toggleTodoList } = TodoListModuleActions;
+
 export const refreshModules = () =>
     refreshFunctions.forEach(fn => fn());
+
+export const toggleTodoListVisibility = () =>
+    toggleTodoList && toggleTodoList();
