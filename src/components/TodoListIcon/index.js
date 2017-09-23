@@ -2,7 +2,7 @@ import React from 'react';
 import IconButton from 'react-toolbox/lib/button/IconButton';
 import * as Actions from '@actions';
 
-const SettingsIcon = () => (
+const TodoListIcon = () => (
     <div className="control__icon">
         <IconButton
             icon="view_list"
@@ -11,4 +11,4 @@ const SettingsIcon = () => (
     </div>
 );
 
-export default SettingsIcon;
+export default TodoListIcon;
