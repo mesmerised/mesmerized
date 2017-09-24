@@ -1,8 +1,8 @@
 .todoList {
-    width: 420px;
+    width: 360px;
     background-color: rgba(0, 0, 0, 0.6);
     opacity: 0.8;
-    transition: background-color 1s ease, opacity 0.8s ease;
+    transition: background-color 0.8s ease, opacity 0.8s ease;
 
     &:hover, &:active {
         opacity: 1;
@@ -36,11 +36,48 @@
 
     &__body {
         min-height: 280px;
+        max-height: 280px;
+        overflow-y: auto;
+
+        &_emptyMessage {
+            color: #aaa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px;
+            font-size: 16px;
+        }
+    }
+
+    &__footer {
+        display: flex;
+
+        &__text {
+            flex: 1
+        }
+
+        &__icon {
+            margin-right: -12px;
+            margin-bottom: -12px;
+            align-items: center;
+        }
     }
 
     &__item {
         border-bottom: 1px dotted #ccc;
         display: flex;
+
+        &__new {
+            padding: 0;
+
+            > input, > textarea {
+                color: #fff !important;
+            }
+
+            > span {
+                display: none !important;
+            }
+        }
 
         &__text {
             padding: 12px;
@@ -48,12 +85,39 @@
             vertical-align: middle;
             font-size: 14px;
             flex: 1;
+            text-decoration-color: transparent;
+            transition: all 0.4s ease;
+
+            &_done {
+                text-decoration: line-through;
+                text-decoration-color: #fff;
+                font-style: italic;
+                opacity: 0.4;
+            }
+
+            &_hasPrecedingIcon {
+                padding-left: 0;
+            }
         }
 
         &__icon {
             padding: 2px;
             display: flex;
             align-items: center;
+
+            &_tick {
+                color: #aaa !important;
+                opacity: 0.4;
+                transition: all 0.4s ease;
+
+                &:hover, &:active {
+                    opacity: 1;
+                }
+            }
+
+            &_done {
+                color: #34AF23 !important;
+            }
         }
     }
 }
