@@ -26,8 +26,9 @@ const handleUnitChange = (value, ev) =>
 const handleRefreshIntervallChange = (value, ev) =>
     setSetting({refreshInterval : parseInt(value, 10)});
 
-const UnitsComponent = ({ unit, showWeather }) => (
+const UnitsComponent = ({ className, unit, showWeather }) => (
     <RadioGroup
+        className={ className }
         value={ unit }
         disabled={ !showWeather }
         onChange={ handleUnitChange } >
@@ -44,8 +45,9 @@ const UnitsComponent = ({ unit, showWeather }) => (
     </RadioGroup>
 );
 
-const RefreshIntervalDropdown = ({ refreshInterval, showWeather }) => (
+const RefreshIntervalDropdown = ({ className, refreshInterval, showWeather }) => (
     <Dropdown
+        className={ className }
         label="Refresh Interval"
         value={ refreshInterval }
         source={ REFRESH_INTERVALS }
@@ -63,17 +65,16 @@ const SettingsContainer = ({ showWeather, unit, refreshInterval }) => (
             onChange={ handleShowChange } />
         <ListItem
             itemContent={
-                <RefreshIntervalDropdown
-                    refreshInterval={ refreshInterval }
-                    showWeather={ showWeather } />
-                }
-            ripple={ false }
-            selectable={ false } />
-        <ListItem
-            itemContent={
-                <UnitsComponent
-                    unit={ unit }
-                    showWeather={ showWeather } />
+                <div>
+                    <UnitsComponent
+                        className="settings__inlineItem"
+                        unit={ unit }
+                        showWeather={ showWeather } />
+                    <RefreshIntervalDropdown
+                        className="settings__inlineItem"
+                        refreshInterval={ refreshInterval }
+                        showWeather={ showWeather } />
+                </div>
                 }
             ripple={ false }
             selectable={ false } />
