@@ -23,18 +23,23 @@ const autoFocus = instance =>
 const toggleCompleted = ({id, isDone}) =>
     Actions.markAsCompleted({id, completed: !isDone});
 
+const deleteItem = ({id}) =>
+    Actions.removeItem({id});
+
 // done items at the bottom
 const itemSorter = (x, y) => x.isDone ? 1 : y.isDone ? -1 : 0;
-// @todo: add delete functionality
+
 // @tod0: indicate completed/created time
 const getMappedItems = items => {
     return Object.keys(items).map(id => {
         const item = items[id];
-        const { value, /*createdAt,*/ reminderAt, completedAt } = item;
+        const { value, /*createdAt,*/ /*reminderAt,*/ completedAt } = item;
         const isDone = Boolean(completedAt);
-        const iconType = isDone ? 'delete_forever'
-            : (reminderAt ? 'alarm_on' : 'alarm_add');
-        const icon = <IconButton inverse icon={ iconType } />;
+        // @todo: add reminder functionality
+        // const iconType = isDone ? 'delete_forever'
+        //     : (reminderAt ? 'alarm_on' : 'alarm_add');
+        const icon = <IconButton inverse icon="delete_forever"
+            onClick={ () => deleteItem({id}) } />;
         const doneIcon = <IconButton inverse icon="done"
             onClick={ () => toggleCompleted({id, isDone}) } />;
         return { id, value, icon, doneIcon, isDone };

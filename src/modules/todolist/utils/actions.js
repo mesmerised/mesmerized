@@ -16,6 +16,9 @@ export const showTodoList = () =>
 export const hideTodoList = () =>
     setSetting({showTodoList: false});
 
+/**
+ * Toggles the todo list visibility.
+ */
 export const toggleTodoList = () => {
     const { showTodoList: isVisible } = store.state;
     if (isVisible) {
@@ -25,12 +28,15 @@ export const toggleTodoList = () => {
     }
 }
 
+/**
+ * Useful to cache the last drag position of the
+ * Todo List widget on the screen.
+ *
+ * @param  {Object} payload     Payload containing position data
+ */
 export function updatePosition(payload = {}) {
     const { position = {} } = payload;
-
-    // cache last dragged position update
     StorageUtils.set(cacheConfigs.lastPosition, position);
-
     store.state = {...store.state, position};
 }
 
@@ -97,7 +103,32 @@ export function addItem(payload = {}) {
     };
 }
 
-// @todo: removeItem
+/**
+ * Deletes a previously added item from the existing todo list.
+ * Expects mandatory id property as the payload.
+ *
+ * @todo: remove reminder if present as part of the item
+ *
+ * @param {Object} payload  Payload with id
+ */
+export function removeItem(payload = {}) {
+    const { id } = payload;
+
+    if (!id) return;
+
+    const itemsCacheKey = cacheConfigs.items;
+    const existingItems = StorageUtils.get(itemsCacheKey) || {};
+
+    delete existingItems[id];
+    delete store.state.items[id];
+
+    StorageUtils.set(cacheConfigs.items, existingItems);
+
+    store.state = {
+        ...store.state,
+        items: {...store.state.items}
+    }
+}
 
 /**
  * Marks the given item as completed/incomplete.
