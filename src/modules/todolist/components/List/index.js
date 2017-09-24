@@ -12,6 +12,7 @@ const List = ({
     onCloseClick,
     items = [],
     emptyMessage,
+    onEmptyBodyClick,
 }) => {
     return (
         <div className="todoList">
@@ -34,7 +35,7 @@ const List = ({
                         )
                     }
                 </div> :
-                <div className="todoList__body todoList__body_emptyMessage">
+                <div className="todoList__body todoList__body_emptyMessage" onClick={ onEmptyBodyClick }>
                     { emptyMessage }
                 </div>
             }

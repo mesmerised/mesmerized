@@ -102,14 +102,21 @@ class TodoList extends Component {
             items.push({id: 'show_new', isNew: true, value, icon});
         }
 
+        const emptyMessage =
+            <div style={ { textAlign: 'center' } }>
+                <p>It's lonely in here, plan some achievements :)</p>
+                <p>Click to add a new item!</p>
+            </div>;
+
         const props = {
             items,
+            emptyMessage,
             header: 'Todo',
-            emptyMessage: 'It is lonely in here, make some plans!',
             isClosable: true,
             isAddable: true,
             onAddClick: this.handleAddClick,
             onCloseClick: Actions.hideTodoList,
+            onEmptyBodyClick: this.handleAddClick,
         };
 
         return (
