@@ -8,6 +8,7 @@ const itemsCacheKey = cacheConfigs.items;
 
 export const getStateObject = () => ({
     showTodoList: Settings.showTodoList,
+    purgeInterval: Settings.purgeInterval,
     position: StorageUtils.get(lastPositionCacheKey) || {x: 0, y: 0},
     items: StorageUtils.get(itemsCacheKey) || {},
 });

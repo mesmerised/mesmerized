@@ -11,6 +11,17 @@ const KEYS = {
     ESCAPE: 'Escape'
 };
 
+const THREE_DAYS = (3 * 24 * 60 * 60 * 1000);
+const getPurgeBeforeTime = (interval = THREE_DAYS) =>
+    new Date().getTime() - interval;
+
+// remove completed entries older than 3 days
+// the operation might be expensive, so defer it by default
+const purgeCompletedOldEntries = (interval) =>
+    setTimeout( () => Actions.purgeCompleted(
+        {completedBefore: getPurgeBeforeTime(interval)})
+    , 0);
+
 const handleDragStop = (ev, data) => {
     const { x, y } = data;
     const position = {x, y};
@@ -71,6 +82,11 @@ class TodoList extends Component {
 
         try {
             Actions.addItem({ value });
+            // also purge older completed entries
+            // as that can get piled up in the list
+            const { purgeInterval } = this.props;
+            purgeCompletedOldEntries(purgeInterval);
+            // empty new item input
             target.value = '';
             // @todo: scroll target to view
             target.focus();
@@ -83,6 +99,12 @@ class TodoList extends Component {
         const value = ev.target.value.trim();
         !value && this.setState({showNew: false});
     };
+
+    componentDidMount() {
+        const { purgeInterval } = this.props;
+        // purge older completed entries on load
+        purgeCompletedOldEntries(purgeInterval);
+    }
 
     render() {
         const { showTodoList, position } = this.props;

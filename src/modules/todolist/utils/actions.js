@@ -127,7 +127,7 @@ export function removeItem(payload = {}) {
     store.state = {
         ...store.state,
         items: {...store.state.items}
-    }
+    };
 }
 
 /**
@@ -174,5 +174,55 @@ export function markAsCompleted(payload = {}) {
     store.state = {
         ...store.state,
         items: {...store.state.items, ...itemObj}
+    };
+}
+
+/**
+ * Purge the items that have already been marked completed.
+ * Set either `all` or `completedBefore` properties to
+ * be able to purge the data from the stored cache.
+ *
+ * Settings all to true would remove all the items that are marked
+ * as completed, irrespective of the completed time.
+ * To only remove items specific to a completed date range,
+ * use the `completedBefore` property.
+ *
+ * @param  {Object} payload     Payload with options
+ * @param  {Boolean} payload.all Remove all completed
+ * @param  {Boolean} payload.completedBefore Remove all completed before given time
+ */
+export function purgeCompleted(payload = {}) {
+    const { all, completedBefore } = payload;
+
+    if (!all && !completedBefore) return;
+
+    const itemsCacheKey = cacheConfigs.items;
+    const existingItems = StorageUtils.get(itemsCacheKey);
+    const existingItemsKeys = existingItems && Object.keys(existingItems);
+
+    if (!existingItemsKeys || !existingItemsKeys.length) return;
+
+    // if the request is to purge all the completed items,
+    // set time to current time, because technically nothing
+    // could have been completed before current time
+    const timeToCheck = all ? new Date().getTime() : completedBefore;
+
+    existingItemsKeys.forEach(id => {
+        const item = existingItems[id];
+        if (!item.completedAt || !(item.completedAt < timeToCheck)) return;
+
+        delete existingItems[id];
+        delete store.state.items[id];
+    });
+
+    // nothing was deleted from the entry
+    // so no need to proceed
+    if (existingItemsKeys === Object.keys(existingItems)) return;
+
+    StorageUtils.set(cacheConfigs.items, existingItems);
+
+    store.state = {
+        ...store.state,
+        items: {...store.state.items}
     };
 }

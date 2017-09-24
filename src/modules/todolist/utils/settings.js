@@ -1,4 +1,5 @@
 import configs from '../configs/settings.config';
+import { PURGE_INTERVALS } from '../configs/constants';
 import { settingsFactory } from '@utils/settings.utils';
 
 /**
@@ -7,6 +8,7 @@ import { settingsFactory } from '@utils/settings.utils';
  */
 const defaults = {
     showTodoList: false,
+    purgeInterval: PURGE_INTERVALS.THREE_DAYS,
 }
 
 export default settingsFactory({ configs, defaults });
