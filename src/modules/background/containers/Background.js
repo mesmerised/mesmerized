@@ -1,15 +1,26 @@
 import React, { Component } from 'react';
-import FullscreenImage from '../components/FullscreenImage';
+import FullscreenImage, { IMAGE_TYPE } from '../components/FullscreenImage';
+import CreditsComponent from '../components/Credits';
 import placeholderImage from '../images/placeholder.jpeg';
 import { prefetchRandomPhotos } from '../utils/api';
 import ConnectedStoreHOC from '../utils/connect.store.hoc';
-
-// @todo: update api credits
 
 class Background extends Component {
     static defaultProps = {
         photoUrl: placeholderImage,
         timeout: 1500,
+    };
+
+    state = {
+        showCredits: false,
+        creditType: null,
+    };
+
+    handlePhotoLoad = ({type}) => {
+        this.setState({
+            showCredits: true,
+            creditType: type,
+        });
     };
 
     componentDidMount() {
@@ -21,17 +32,33 @@ class Background extends Component {
     render() {
         const {
             photoUrl,
+            photoMeta,
             timeout,
             previousPhotoUrl,
-            placeholderPhotoUrl = placeholderImage
+            placeholderPhotoUrl = placeholderImage,
+            placeholderPhotoMeta
         } = this.props;
+
+        const {
+            showCredits,
+            creditType
+        } = this.state;
+
+        const credits = showCredits &&
+            <CreditsComponent
+                meta={ creditType === IMAGE_TYPE.main ?
+                    photoMeta : placeholderPhotoMeta } />;
+
         const backgroundImage = previousPhotoUrl ? `url(${previousPhotoUrl})` : 'none';
+
         return (
             <FullscreenImage
                 style={ { backgroundImage } }
                 src={ photoUrl }
                 placeholder={ placeholderPhotoUrl }
-                timeout={ timeout } />
+                onPhotoLoad={ this.handlePhotoLoad }
+                timeout={ timeout }
+                credits={ credits } />
         );
     }
 }

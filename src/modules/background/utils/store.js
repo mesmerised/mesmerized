@@ -7,26 +7,41 @@ import Settings from './settings';
 export const getStateObject = () => {
     const fetchFromServer = Settings.fetchFromServer;
     let photoUrl;
+    let placeholderPhotoUrl;
+    let photoMeta;
+    let placeholderPhotoMeta;
 
     // if allowed to fetch from server
     // begin with assuming we get a
     // prefetched photo from the api
     if (fetchFromServer) {
-        photoUrl = getPhotoUrl(getRandomPrefetchedPhoto());
+        photoMeta = getRandomPrefetchedPhoto();
+        photoUrl = getPhotoUrl(photoMeta);
     }
 
-    // prefetched api photo
     // or a locally stored photo
+    if (!photoUrl) {
+        photoMeta = getRandomLocalPhoto();
+        photoUrl = getLocalPhotoPath(photoMeta);
+    }
     // or a fallback placeholder photo
-    photoUrl = photoUrl
-        || getLocalPhotoPath(getRandomLocalPhoto())
-        || placeholderImage;
+    if (!photoUrl) {
+        photoMeta = null;
+        photoUrl = placeholderImage;
+    }
 
     // get a random image as placeholder
     // to handle offline network scenarios
-    const placeholderPhotoUrl = getLocalPhotoPath(getRandomLocalPhoto());
+    placeholderPhotoMeta = getRandomLocalPhoto();
+    placeholderPhotoUrl = getLocalPhotoPath(placeholderPhotoMeta);
 
-    return { fetchFromServer, photoUrl, placeholderPhotoUrl };
+    return {
+        fetchFromServer,
+        photoUrl,
+        photoMeta,
+        placeholderPhotoUrl,
+        placeholderPhotoMeta,
+    };
 };
 
 export default createStore(getStateObject());;

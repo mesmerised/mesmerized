@@ -7,4 +7,12 @@ export default {
     uris: {
         randomPhoto: '/photos/random/'
     },
+    attribution: {
+        baseUrl: 'https://unsplash.com',
+        utm: {
+            utm_source: 'mesmerized',
+            utm_medium: 'referral',
+            utm_campaign: 'api-credit',
+        }
+    },
 };
