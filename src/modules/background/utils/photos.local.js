@@ -2,6 +2,7 @@ import { getRandomInt } from '@utils/general.utils';
 import * as StorageUtils from '@utils/storage.utils';
 import cacheConfigs from '../configs/cache.config';
 import categoriesConfig from '../configs/categories.config';
+import { prefetch as prefetchImage } from '@utils/image.utils';
 
 const localPhotosCacheKey = cacheConfigs.localPhotos;
 
@@ -37,8 +38,12 @@ const categories = Object.keys(categoriesConfig);
         .then(photos => {
             photos.forEach(p => {
                 import(`../images/categories/${c}/${p.id}.jpg`)
-                    .then(path => StorageUtils.update(localPhotosCacheKey, {[path]: p}))
-                    .catch(error => error);
+                    .then(path => {
+                        StorageUtils.update(localPhotosCacheKey, {[path]: p});
+                        // also prefetch image to be able to
+                        // get loaded from disk cache
+                        prefetchImage(path).catch(x => x);
+                    }).catch(error => error);
             });
         }).catch(error => error);
 });
