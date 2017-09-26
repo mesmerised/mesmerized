@@ -13,6 +13,7 @@ const List = ({
     items = [],
     emptyMessage,
     onEmptyBodyClick,
+    footer,
 }) => {
     return (
         <div className="todoList">
@@ -41,7 +42,9 @@ const List = ({
             }
             { isAddable &&
                 <div className="todoList__footer">
-                    <div className="todoList__footer__text" />
+                    <div className="todoList__footer__text">
+                        { footer }
+                    </div>
                     <div className="todoList__footer__icon">
                         <Button floating mini
                             icon="add"

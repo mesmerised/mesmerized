@@ -3,6 +3,7 @@
     background-color: rgba(0, 0, 0, 0.6);
     opacity: 0.8;
     transition: background-color 0.8s ease, opacity 0.8s ease;
+    border-radius: 4px;
 
     &:hover, &:active {
         opacity: 1;
@@ -54,7 +55,12 @@
         display: flex;
 
         &__text {
-            flex: 1
+            flex: 1;
+            color: #aaa;
+            font-size: 12px;
+            padding: 12px 4px;
+            text-align: center;
+            margin-right: -12px;
         }
 
         &__icon {

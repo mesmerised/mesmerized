@@ -135,9 +135,17 @@ class TodoList extends Component {
                 <p>Click to add a new item!</p>
             </div>;
 
+        let footer = 'Drag this widget using the header';
+        if (position && (position.x || position.y)) {
+            // do not show footer message if user has already
+            // dragged the widget around and knows it already ;)
+            footer = null;
+        }
+
         const props = {
             items,
             emptyMessage,
+            footer,
             header: 'Todo',
             isClosable: true,
             isAddable: true,
