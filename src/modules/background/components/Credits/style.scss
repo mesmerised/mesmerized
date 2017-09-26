@@ -6,7 +6,7 @@
     background-color: rgba(0, 0, 0, 0.1);
     user-select: none;
     transition: background-color 1s ease;
-    border-radius: 0 0 8px 8px;
+    border-radius: 0 0 4px 4px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -17,6 +17,7 @@
 
     &__icon {
         margin-right: 4px;
+        vertical-align: middle;
     }
 
     &__item {
