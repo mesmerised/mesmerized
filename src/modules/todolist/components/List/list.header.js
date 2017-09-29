@@ -1,4 +1,5 @@
 import React from 'react';
+import MdClose from 'react-icons/lib/md/close';
 import IconButton from 'react-toolbox/lib/button/IconButton';
 
 const ListHeader = ({ children, showCloseIcon = false, onCloseClick }) => (
@@ -9,7 +10,7 @@ const ListHeader = ({ children, showCloseIcon = false, onCloseClick }) => (
         { showCloseIcon &&
             <div className="todoList__header__icon">
                 <IconButton
-                icon="close"
+                icon={ <MdClose /> }
                 inverse={ true }
                 onClick={ onCloseClick } />
             </div>

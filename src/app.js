@@ -1,5 +1,4 @@
 import React from 'react';
-import 'material-design-icons/iconfont/material-icons.css';
 import './assets/react-toolbox/theme.css';
 import './assets/styles/base.css';
 import theme from './assets/react-toolbox/theme';

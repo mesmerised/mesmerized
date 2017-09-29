@@ -1,5 +1,5 @@
 import React from 'react';
-import FontIcon from 'react-toolbox/lib/font_icon/FontIcon';
+import MdPhoto from 'react-icons/lib/md/photo';
 import { toUrl } from '@utils/url.utils';
 import apiConfigs from '../../configs/api.config';
 import './style.css';
@@ -13,7 +13,7 @@ const Credits = ({ meta = {} }) => {
     if (!user) return null;
 
     const { html } = links;
-    const icon = <FontIcon className="attribution__icon" value="photo" />;
+    const icon = <MdPhoto className="attribution__icon" />;
     const iconLink = html ?
         <a className="attribution__item" href={ toUrl(html, utm) }>{ icon }</a>
         : icon;

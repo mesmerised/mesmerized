@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import MdDelete from 'react-icons/lib/md/delete';
+import MdDeleteForever from 'react-icons/lib/md/delete-forever';
+import MdDone from 'react-icons/lib/md/done';
 import IconButton from 'react-toolbox/lib/button/IconButton';
 import Input from 'react-toolbox/lib/input/Input';
 import List from '../components/List';
@@ -49,9 +52,9 @@ const getMappedItems = items => {
         // @todo: add reminder functionality
         // const iconType = isDone ? 'delete_forever'
         //     : (reminderAt ? 'alarm_on' : 'alarm_add');
-        const icon = <IconButton inverse icon="delete_forever"
+        const icon = <IconButton inverse icon={ <MdDeleteForever /> }
             onClick={ () => deleteItem({id}) } />;
-        const doneIcon = <IconButton inverse icon="done"
+        const doneIcon = <IconButton inverse icon={ <MdDone /> }
             onClick={ () => toggleCompleted({id, isDone}) } />;
         return { id, value, icon, doneIcon, isDone };
     }).sort(itemSorter);
@@ -117,7 +120,7 @@ class TodoList extends Component {
 
         if (showNew) {
             const icon = <IconButton inverse
-                icon="delete"
+                icon={ <MdDelete /> }
                 onClick={ this.handleCloseNewClick } />
 
             const value = <Input

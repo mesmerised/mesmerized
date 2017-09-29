@@ -1,4 +1,5 @@
 import React from 'react';
+import MdAdd from 'react-icons/lib/md/add';
 import Button from 'react-toolbox/lib/button/Button';
 import ListHeader from './list.header';
 import ListItem from './list.item';
@@ -47,7 +48,7 @@ const List = ({
                     </div>
                     <div className="todoList__footer__icon">
                         <Button floating mini
-                            icon="add"
+                            icon={ <MdAdd /> }
                             onClick={ onAddClick } />
                     </div>
                 </div>
