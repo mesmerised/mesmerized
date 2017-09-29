@@ -39,6 +39,8 @@
         min-height: 280px;
         max-height: 280px;
         overflow-y: auto;
+        display: flex;
+        flex-direction: column;
 
         &_emptyMessage {
             color: #aaa;
@@ -47,6 +49,11 @@
             justify-content: center;
             padding: 12px;
             font-size: 16px;
+            cursor: text;
+        }
+
+        &__emptyArea {
+            flex: 1;
             cursor: text;
         }
     }
@@ -73,6 +80,7 @@
     &__item {
         border-bottom: 1px dotted #ccc;
         display: flex;
+        min-height: min-content;
 
         &__new {
             padding: 0;

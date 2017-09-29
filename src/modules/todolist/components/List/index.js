@@ -36,6 +36,7 @@ const List = ({
                             </ListItem>
                         )
                     }
+                    <div className="todoList__body__emptyArea" onClick={ onEmptyBodyClick }></div>
                 </div> :
                 <div className="todoList__body todoList__body_emptyMessage" onClick={ onEmptyBodyClick }>
                     { emptyMessage }
