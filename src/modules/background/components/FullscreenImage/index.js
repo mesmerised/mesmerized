@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Image from '@components/Image';
 import './style.css';
 
@@ -7,39 +7,59 @@ export const IMAGE_TYPE = {
     placeholder: 'placeholder'
 };
 
-const FullScreenImage = (props = {}) => {
-    const {
-        src,
-        placeholder,
-        style,
-        timeout,
-        onPhotoLoad,
-        credits,
-    } = props;
+class FullScreenImage extends Component {
+    state = {
+        isLoading: true,
+    };
 
-    const onLoad = () => onPhotoLoad({type: IMAGE_TYPE.main});
-    const onError = () => onPhotoLoad({type: IMAGE_TYPE.placeholder});
+    handlePhotoLoad = (type = IMAGE_TYPE.main) => {
+        const { onPhotoLoad } = this.props;
 
-    return (
-        <div className="background">
-            <div className="background__imageContainer" style={ style }>
-                <Image
-                    key={ src }
-                    extraClasses="background__image"
-                    src={ src }
-                    placeholder={ placeholder }
-                    onLoad={ onPhotoLoad && onLoad }
-                    onError={ onPhotoLoad && onError }
-                    timeout={ timeout } />
-                <div className="background__overlay" />
-            </div>
-            { credits &&
-                <div className="background__credits">
-                    { credits }
+        this.setState({isLoading: false});
+        onPhotoLoad && onPhotoLoad({type});
+    };
+
+    handleOnload = () => {
+        this.handlePhotoLoad(IMAGE_TYPE.main);
+    };
+
+    handleOnError = () => {
+        this.handlePhotoLoad(IMAGE_TYPE.placeholder);
+    };
+
+    render() {
+        const {
+            src,
+            placeholder,
+            style,
+            timeout,
+            credits,
+        } = this.props;
+        const {
+            isLoading
+        } = this.state;
+
+        return (
+            <div className="background">
+                <div className="background__imageContainer" style={ style }>
+                    <Image
+                        key={ src }
+                        extraClasses="background__image"
+                        src={ src }
+                        placeholder={ placeholder }
+                        onLoad={ this.handleOnload }
+                        onError={ this.handleOnError }
+                        timeout={ timeout } />
+                    <div className={ `background__overlay ${isLoading ? 'background__overlay_loading' : ''}` } />
                 </div>
-            }
-        </div>
-    );
+                { credits &&
+                    <div className="background__credits">
+                        { credits }
+                    </div>
+                }
+            </div>
+        );
+    }
 }
 
 export default FullScreenImage;
