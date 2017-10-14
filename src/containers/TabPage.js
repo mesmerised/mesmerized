@@ -9,6 +9,7 @@ import { Container as TodoListContainer } from '@modules/todolist';
 import SettingsIcon from '@components/SettingsIcon';
 import RefreshIcon from '@components/RefreshIcon';
 import TodoListIcon from '@components/TodoListIcon';
+import FaCogs from 'react-icons/lib/fa/cogs';
 import './TabPage.css';
 
 class TabPage extends Component {
@@ -19,10 +20,13 @@ class TabPage extends Component {
                 <Panel>
                     <div className="panel">
                         <div className="panel__topContainer panel__topContainer_right">
+                            <div className="panel__topContainer__icon">
+                                <FaCogs />
+                            </div>
                             <div className="control">
-                                <TodoListIcon />
-                                <RefreshIcon />
                                 <SettingsIcon />
+                                <RefreshIcon />
+                                <TodoListIcon />
                             </div>
                         </div>
                         <div className="panel__draggableContainer">
