@@ -3,7 +3,7 @@ import './style.css'
 
 const Weather = ({ temperature, cityName, iconId, isLoading }) => (
     <div className={ isLoading ? "weather weather__loading" : "weather" }>
-        { temperature &&
+        { Number.isFinite(temperature) &&
             <div className="weather__temperature">{ Math.round(temperature) }</div>
         }
         { iconId &&
