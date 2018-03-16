@@ -20,8 +20,10 @@ class TabPage extends Component {
                 <Panel>
                     <div className="panel">
                         <div className="panel__topContainer panel__topContainer_right">
-                            <div className="panel__topContainer__icon">
-                                <FaCogs />
+                            <div>
+                                <div className="panel__topContainer__icon">
+                                    <FaCogs />
+                                </div>
                             </div>
                             <div className="control">
                                 <SettingsIcon />
