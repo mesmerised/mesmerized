@@ -2,8 +2,8 @@ import React from 'react';
 import ClockComponent from '../components/Clock';
 import ConnectedStoreHOC from '../utils/connect.store.hoc';
 
-function ClockContainer({is12hours, blinkForSeconds, showDate, showClock}) {
-    const props = { is12hours, blinkForSeconds, showDate };
+function ClockContainer({tewelveHourFormat, blinkForSeconds, showDate, showClock}) {
+    const props = { tewelveHourFormat, blinkForSeconds, showDate };
     return (
         showClock && <ClockComponent { ...props } />
     );

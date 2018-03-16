@@ -7,7 +7,7 @@ const ONE_SECOND = 1000;
 
 class Clock extends Component {
     static defaultProps = {
-        is12hours: false,
+        tewelveHourFormat: false,
         blinkForSeconds: false,
         showDate: true,
     };
@@ -37,9 +37,9 @@ class Clock extends Component {
 
     render() {
         let { hours, minutes, date } = this.state;
-        const { is12hours, blinkForSeconds, showDate } = this.props;
+        const { tewelveHourFormat, blinkForSeconds, showDate } = this.props;
 
-        if (is12hours && hours > TEWELVE_HRS) {
+        if (tewelveHourFormat && hours > TEWELVE_HRS) {
             hours = hours - TEWELVE_HRS;
         }
 
