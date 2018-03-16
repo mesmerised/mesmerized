@@ -8,7 +8,7 @@ import ConnectedStoreHOC from '../utils/connect.store.hoc';
 class Background extends Component {
     static defaultProps = {
         photoUrl: placeholderImage,
-        timeout: 1500,
+        timeout: 3000,
     };
 
     state = {

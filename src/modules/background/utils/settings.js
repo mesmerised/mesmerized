@@ -1,4 +1,5 @@
 import configs from '../configs/settings.config';
+import { NEW_PHOTO_DURATIONS } from '../configs/constants';
 import { settingsFactory } from '@utils/settings.utils';
 
 /**
@@ -7,6 +8,7 @@ import { settingsFactory } from '@utils/settings.utils';
  */
 const defaults = {
     fetchFromServer: true,
+    newPhotoDuration: NEW_PHOTO_DURATIONS.HOURLY,
 }
 
 export default settingsFactory({ configs, defaults });

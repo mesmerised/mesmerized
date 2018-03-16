@@ -7,6 +7,8 @@ import cacheConfigs from '../configs/cache.config';
 const { client_id, base, uris } = apiConfigs;
 const randomPhotoApiUrl = `${base}${uris.randomPhoto}`;
 const prefetchedPhotoCacheKey = cacheConfigs.prefetchedPhotos;
+const lastShownPhotoCacheKey = cacheConfigs.lastShownPhoto;
+const lastShownTimeCacheKey = cacheConfigs.lastShownTime;
 
 // random photos api defaults
 const DEFAULTS = {
@@ -98,4 +100,34 @@ export function getRandomPrefetchedPhoto() {
     delete prefetchedPhotos[selectedId];
     StorageUtils.set(prefetchedPhotoCacheKey, prefetchedPhotos);
     return unusedPhoto;
+}
+
+/**
+ * Returns a new photo to display based on the previously
+ * shown photo time and the passed duration to check.
+ *
+ * @param {Number} newPhotoDuration Duration to check
+ * @return {Object}                 Photo object as per the API
+ */
+export function getPrefetchedPhotoForDisplay(newPhotoDuration) {
+    // determine if a previously shown photo needs to be returned
+    if (Number.isInteger(newPhotoDuration)) {
+        const currentTime = Date.now();
+        const lastShownPhoto = StorageUtils.get(lastShownPhotoCacheKey);
+        const lastShownTime = StorageUtils.get(lastShownTimeCacheKey);
+
+        if (lastShownPhoto && Number.isInteger(lastShownTime)) {
+            const duration = currentTime - lastShownTime;
+            if (duration < newPhotoDuration) return lastShownPhoto;
+        }
+    }
+
+    // get a fresh new photo
+    const photo = getRandomPrefetchedPhoto();
+    if (photo) {
+        StorageUtils.set(lastShownPhotoCacheKey, photo);
+        StorageUtils.set(lastShownTimeCacheKey, Date.now());
+    }
+
+    return photo;
 }

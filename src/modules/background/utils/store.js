@@ -1,11 +1,13 @@
 import { createStore } from '@utils/store.utils';
 import placeholderImage from '../images/placeholder.jpeg';
-import { getPhotoUrl, getRandomPrefetchedPhoto } from './api';
+import { getPhotoUrl, getPrefetchedPhotoForDisplay } from './api';
 import { getLocalPhotoPath, getRandomLocalPhoto } from './photos.local';
 import Settings from './settings';
 
-export const getStateObject = () => {
+export const getStateObject = (force = false) => {
     const fetchFromServer = Settings.fetchFromServer;
+    const newPhotoDuration = Settings.newPhotoDuration;
+
     let photoUrl;
     let placeholderPhotoUrl;
     let photoMeta;
@@ -15,7 +17,7 @@ export const getStateObject = () => {
     // begin with assuming we get a
     // prefetched photo from the api
     if (fetchFromServer) {
-        photoMeta = getRandomPrefetchedPhoto();
+        photoMeta = getPrefetchedPhotoForDisplay(force ? 0 : newPhotoDuration);
         photoUrl = getPhotoUrl(photoMeta);
     }
 
@@ -41,6 +43,7 @@ export const getStateObject = () => {
         photoMeta,
         placeholderPhotoUrl,
         placeholderPhotoMeta,
+        newPhotoDuration,
     };
 };
 
