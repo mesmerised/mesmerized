@@ -38,9 +38,11 @@ class Settings extends Component {
         return (
             <Layout>
                 <Panel>
-                    <List selectable ripple>
-                        { settingsContainerItems }
-                    </List>
+                    <div className="settings__container">
+                        <List selectable ripple>
+                            { settingsContainerItems }
+                        </List>
+                    </div>
                 </Panel>
             </Layout>
         );

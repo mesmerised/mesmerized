@@ -4,6 +4,10 @@ body {
 }
 
 .settings {
+    &__container {
+        max-height: 420px;
+        overflow-y: auto;
+    }
     &__inlineItem {
         display: inline-block;
         margin-right: 12px;
