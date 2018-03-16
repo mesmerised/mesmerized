@@ -54,18 +54,21 @@ export function getWeatherForLocation({ longitude, latitude, refreshInterval = 0
     if (prefetchedWeather && Object.keys(prefetchedWeather).length) {
         const { coord = {}, dt } = prefetchedWeather;
         let { lon, lat } = coord;
-        const lastUpdateTime = new Date(dt*1000).getTime();
-        const currentTime = new Date().getTime();
 
-        lon = lon.toFixed(2);
-        lat = lat.toFixed(2);
+        if (typeof lon !== 'undefined' && typeof lat !== 'undefined') {
+            const lastUpdateTime = new Date(dt * 1000).getTime();
+            const currentTime = new Date().getTime();
 
-        // if the provided coordinates match
-        // and the last updated time was in
-        // the recent past, return the prefetched weather data
-        if (lon === longitude && lat === latitude
-            && (currentTime - lastUpdateTime) < refreshInterval) {
-            return Promise.resolve().then(x => prefetchedWeather);
+            lon = lon.toFixed(2);
+            lat = lat.toFixed(2);
+
+            // if the provided coordinates match
+            // and the last updated time was in
+            // the recent past, return the prefetched weather data
+            if (lon === longitude && lat === latitude
+                && (currentTime - lastUpdateTime) < refreshInterval) {
+                return Promise.resolve().then(x => prefetchedWeather);
+            }
         }
     }
 
