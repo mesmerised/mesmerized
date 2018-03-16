@@ -9,6 +9,7 @@ const { baseUrl, utm } = attributionConfigs;
 const serviceLink = toUrl(baseUrl, utm);
 
 const Credits = ({ meta = {} }) => {
+    if (!meta) return null;
     const { user, links = {} } = meta;
     if (!user) return null;
 
