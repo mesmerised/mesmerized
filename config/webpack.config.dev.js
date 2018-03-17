@@ -245,7 +245,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       inject: true,
       chunks: ["options"],
-      template: `${paths.appPublic}/tabpage.html`,
+      template: `${paths.appPublic}/options.html`,
       filename: `${paths.appBuild}/options.html`,
     }),
     // Add module names to factory functions so they appear in browser profiler.
