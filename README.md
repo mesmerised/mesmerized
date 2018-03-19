@@ -1,12 +1,24 @@
-![title](./images/title.png)
+<p align="center">
+    <img src="./images/title.png" alt="mesmerized" />
+</p>
 
 Browser Extension to give a fresh look to your new tab page, with beautiful backgrounds, inspirational quotes, weather forecasts, reminders, to-do lists and much more.
 
 ### Downloads
 
-The extension is available for download for both Chrome and Firefox browsers from their respective web stores.
+The extension is available to download for both Chrome and Firefox browsers from their respective web stores.
 - [Chrome](https://chrome.google.com/webstore/detail/mesmerized/ieklodmmjfoaelcnfoilfcodkmicbooc)
 - [Firefox](https://addons.mozilla.org/en-US/firefox/addon/mesmerized/)
+
+### Feature Modules
+
+Following modules are available for now, more to come soon.
+
+- Background Photos
+- Quotes
+- Weather
+- Todo List
+- Clock
 
 ### Screenshots
 
@@ -19,16 +31,6 @@ The extension is available for download for both Chrome and Firefox browsers fro
 ![mesmerized04](./images/mesmerized04.png)
 
 ![mesmerized05](./images/mesmerized05.png)
-
-### Feature Modules
-
-Following modules are available for now, more to come soon.
-
-- Background Photos
-- Quotes
-- Weather
-- Todo List
-- Clock
 
 ### Project Details
 
