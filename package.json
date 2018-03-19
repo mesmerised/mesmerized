@@ -1,14 +1,22 @@
 {
   "name": "mesmerized",
   "version": "0.1.0",
-  "description": "Chrome Extension to give a fresh look to your new tab page, with beautiful backgrounds, inspirational quotes, weather forecasts, reminders, to-do lists and much more.",
+  "description": "Browser Extension to give a fresh look to your new tab page, with beautiful backgrounds, inspirational quotes, weather forecasts, reminders, to-do lists and much more.",
   "private": true,
   "author": "Emad Alam <emad.alam@yahoo.com>",
-  "homepage": ".",
+  "homepage": "https://mesmerized.me",
   "repository": {
     "type": "git",
     "url": "https://github.com/emadalam/mesmerized.git"
   },
+  "keywords": [
+    "extension",
+    "browsersextension",
+    "chromeextension",
+    "firefoxextension",
+    "newtabs",
+    "tabs"
+  ],
   "license": "MIT",
   "dependencies": {
     "autoprefixer": "7.1.2",
