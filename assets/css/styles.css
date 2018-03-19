@@ -38,6 +38,15 @@ a.btn{
 	text-align: center;
 }
 
+a.btn.disabled{
+	color: #555;
+	background-color: #ccc;
+}
+
+.hidden{
+	display: none;
+}
+
 hr{
 	width: 150px;
 	height: 2px;
@@ -317,8 +326,6 @@ header nav li:last-child{
 
 }
 
-
-
 /*--------------------
  	Reviews Section
 --------------------*/
@@ -436,7 +443,6 @@ footer ul li:last-child{
 }
 
 footer p{
-	text-transform: uppercase;
 	font-size: 14px;
 	color: rgba(255,255,255,0.6);
 	margin-bottom: 10px;
@@ -452,11 +458,4 @@ footer p a{
 		padding: 80px 15px;
 	}
 
-}
-
-
-/* -- Demo ads -- */
-
-@media (max-width: 1200px) {
-	#bsaHolder{ display:none;}
 }

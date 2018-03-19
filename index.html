@@ -4,12 +4,26 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>mesmerized</title>
+	<title>mesmerized</title>
+	
+	<meta property="og:title" content="mesmerized" />
+	<meta property="og:url" content="https://mesmerized.me" />
+	<meta property="og:type" content="website" />
+	<meta property="og:description" content="Transform your new tabs. Be inspired with the beautiful backgrounds, inspirational quotes, weather forecasts, to-do lists and more." />
+	<meta property="og:image" content="assets/img/title.png" />
+
+	<meta name="twitter:card" content="summary" />
+	<meta name="twitter:site" content="@emadalam" />
+	<meta name="twitter:title" content="mesmerized" />
+	<meta name="twitter:description" content="Transform your new tabs. Be inspired with the beautiful backgrounds, inspirational quotes, weather forecasts, to-do lists and more." />
+	<meta name="twitter:image" content="assets/img/title.png" />
 
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" integrity="sha384-3AB7yXWz4OeoZcPbieVW64vVXEwADiYyAEhwilzWsLw+9FgqpyjjStpPnpBO8o8S" crossorigin="anonymous">
-    <link rel="stylesheet" href="assets/css/styles.css">
+	<link rel="stylesheet" href="assets/css/styles.css">
+	
+	<script src="assets/js/browser-detect.min.js"></script>
 
 </head>
 
@@ -18,9 +32,8 @@
 	<header>
 		<h2><img src="assets/img/logo.png" alt="mesmerized"></h2>
 		<nav>
-			<li><a href="#">Gallery</a></li>
-			<li><a href="#">Features</a></li>
-			<li><a href="#">FAQs</a></li>
+			<li><a href="#gallery">Gallery</a></li>
+			<li><a href="#features">Features</a></li>
 		</nav>
 	</header>
 
@@ -28,28 +41,30 @@
 	<section class="hero">
 		<div class="background-image" style="background-image: url(assets/img/hero.jpg);"></div>
 		<h1>mesmerized</h1>
-		<h3>...transform your browser tabs</h3>
-		<a href="#" class="btn">Install</a>
+		<h3>transform your browser tabs</h3>
+		<a href="javascript:;" class="btn" id="installBtn">Install</a>
+		<p id="mobileMsg">Visit on desktop browser to install.</p>
 	</section>
 
 
 	<section class="gallery">
+		<a name="gallery"></a>
 		<h3 class="title">Gallery</h3>
 		<p>Give a fresh look to your new tab page. Be inspired with the beautiful backgrounds, inspirational quotes, subtle weather forecasts, set reminders, to-do lists and much more.</p>
 		<hr>
 
 		<ul class="grid">
-			<li class="small" style="background-image: url(assets/img/screens/0.png);"></li>
-			<li class="large" style="background-image: url(assets/img/screens/1.png);"></li>
-			<li class="large" style="background-image: url(assets/img/screens/2.png);"></li>
-			<li class="small" style="background-image: url(assets/img/screens/3.png);"></li>
-			<li class="small" style="background-image: url(assets/img/screens/4.png);"></li>
-            <li class="large" style="background-image: url(assets/img/screens/5.png);"></li>
+			<li class="small" style="background-image: url(assets/img/screens/01.png);"></li>
+			<li class="large" style="background-image: url(assets/img/screens/02.png);"></li>
+			<li class="large" style="background-image: url(assets/img/screens/03.png);"></li>
+			<li class="small" style="background-image: url(assets/img/screens/04.png);"></li>
+			<li class="small" style="background-image: url(assets/img/screens/05.png);"></li>
 		</div>
 	</section>
 
 
 	<section class="features">
+		<a name="features"></a>
 		<h3 class="title">Features</h3>
 		<hr>
 
@@ -57,75 +72,76 @@
 			<li>
 				<i class="fa fa-camera-retro"></i>
 				<h4>Background Photos</h4>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id felis et ipsum bibendum ultrices vitae pulvinar velit.</p>
+				<p>Refreshing new background photos for your new tab page. Pick whether you want a new photo every day, hour or always.</p>
             </li>
             <li>
                 <i class="fa fa-cloud"></i>
                 <h4>Weather Updates</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id felis et ipsum bibendum ultrices vitae pulvinar velit.</p>
+                <p>Get updated with weather conditions and a quick look of the forcast. Pick temperature displays as Celsius or Fahrenheit.</p>
             </li>
             <li>
                 <i class="fa fa-smile"></i>
                 <h4>Inspirational Quotes</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id felis et ipsum bibendum ultrices vitae pulvinar velit.</p>
+                <p>Get inspired with a motivational quote each time you open the tab.</p>
             </li>
         </ul>
         <ul class="grid">
             <li>
                 <i class="fa fa-list"></i>
                 <h4>Todo List</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id felis et ipsum bibendum ultrices vitae pulvinar velit.</p>
+                <p>Keep track of things with this movable widget. Choose how long to keep the completed items for your reference.</p>
             </li>
             <li>
                 <i class="fa fa-clock"></i>
                 <h4>Clock</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id felis et ipsum bibendum ultrices vitae pulvinar velit.</p>
+                <p>So you like to see a big digital clock on your screen with current date details. We got you covered :)</p>
             </li>
             <li>
                 <i class="fa fa-wrench"></i>
                 <h4>Customizable Settings</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id felis et ipsum bibendum ultrices vitae pulvinar velit.</p>
+                <p>There a tons of customization options available for the extension. Configure a minimaliztic view or to your likings.</p>
             </li>
         </ul>
     </section>
 
-    <section class="faqs">
-        <h3 class="title">FAQs</h3>
-        <hr>
-    </section>
-
-
-	<!-- <section class="reviews">
-		<h3 class="title">What others say:</h3>
-
-		<p class="quote">Mauris sit amet mauris a arcu eleifend ultricies eget ut dolor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</p>
-		<p class="author">— Patrick Farrell</p>
-
-		<p class="quote">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id felis et ipsum bibendum ultrices. Morbi vitae pulvinar velit. Sed aliquam dictum sapien, id sagittis augue malesuada eu.</p>
-		<p class="author">— George Smith</p>
-
-		<p class="quote">Donec commodo dolor augue, vitae faucibus tortor tincidunt in. Aliquam vitae leo quis mi pulvinar ornare. Integer eu iaculis metus.</p>
-		<p class="author">— Kevin Blake</p>
-
-
-	</section> -->
-
-
-	<!-- <section class="contact">
-		<h3 class="title">Join our newsletter</h3>
-		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id felis et ipsum bibendum ultrices. Morbi vitae pulvinar velit. Sed aliquam dictum sapien, id sagittis augue malesuada eu.</p>
-		<hr>
-
-		<form>
-			<input type="email" placeholder="Email">
-			<a href="#" class="btn">Subscribe now</a>
-		</form>
-	</section> -->
-
 	<footer>
-        <p>Images courtesy to <a href="http://unsplash.com/" target="_blank">unsplash</a></p>
-        <p>Made with <i class="fa fa-heart"></i> by <a href="https://github.com/emadalam/" target="_blank">eMAD</a>. Contribute to the project on <a href="https://github.com/emadalam/mesmerized" target="_blank">github</a></p>
+		<p>Made with <i class="fa fa-heart"></i> by <a href="https://github.com/emadalam/" target="_blank">eMAD</a></p>
+		<p><i class="fa fa-lightbulb"></i> Inspirations and ideas from <a href="mailto:amina_dropic@outlook.de">Amina</a></p>
+		<p>Contribute to the project on <a href="https://github.com/emadalam/mesmerized" target="_blank">GitHub</a></p>
+		<p><i class="fa fa-envelope"></i> <a href="mailto:support@mesmerized.me" target="_blank">support@mesmerized.me</a></p>
 	</footer>
+
+	<script>
+		function addClass(el, className) {
+			if (el.classList) {
+				el.classList.add(className);
+			} else {
+				el.className += ' ' + className;
+			}
+			return el;
+		}
+
+		var result = browser();
+		var installBtn = document.getElementById('installBtn');
+		var mobileMsg = document.getElementById('mobileMsg');
+		var chromeWebstoreUrl = 'https://chrome.google.com/webstore/detail/mesmerized/ieklodmmjfoaelcnfoilfcodkmicbooc';
+		var firefoxStoreUrl = 'https://addons.mozilla.org/en-US/firefox/addon/mesmerized/';
+
+		if (result.mobile) {
+			addClass(installBtn, 'disabled');
+		}
+		else {
+			addClass(mobileMsg, 'hidden');
+
+			if (result.name === 'chrome') {
+				installBtn.setAttribute('href', chromeWebstoreUrl);
+				installBtn.textContent = 'Install for Chrome';
+			} else if (result.name === 'firefox') {
+				installBtn.setAttribute('href', firefoxStoreUrl);
+				installBtn.textContent = 'Install for Firefox';
+			}
+		}
+	</script>
 
 </body>
 
