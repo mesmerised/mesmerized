@@ -43,6 +43,11 @@ a.btn.disabled{
 	background-color: #ccc;
 }
 
+a.btn.disabled:hover{
+	opacity: 0.9;
+	cursor: default;
+}
+
 .hidden{
 	display: none;
 }
