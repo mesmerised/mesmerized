@@ -16,6 +16,10 @@ const DEFAULTS = {
 // max quotes to prefetch
 const PREFETCH_THRESHOLD = 10;
 
+// generate quote ids
+let quoteId = 0;
+const getUniqueQuoteId = () => `quote__${quoteId++}`;
+
 /**
  * Fetch random quote from the API.
  *
@@ -39,18 +43,18 @@ export function fetchRandomQuote(params = {}) {
  */
 export async function prefetchRandomQuote() {
     const prefetchedQuotes = StorageUtils.get(randomQuoteCacheKey);
-    const exisitngPrefetchedQuotesCount = prefetchedQuotes
+    const existingPrefetchedQuotesCount = prefetchedQuotes
         && Object.keys(prefetchedQuotes).length;
 
     // if sufficient buffer, do not prefetch
-    if (exisitngPrefetchedQuotesCount >= PREFETCH_THRESHOLD) return;
+    if (existingPrefetchedQuotesCount >= PREFETCH_THRESHOLD) return;
 
     // call random quote api
     // then store the quote object in the cache
     // { [quote id] : { quote object }, ... }
     const quote = await fetchRandomQuote();
     if (!quote || !quote.quoteText) return;
-    const id = quote.quoteLink;
+    const id = getUniqueQuoteId();
     StorageUtils.update(randomQuoteCacheKey, {[id]: quote});
 }
 
