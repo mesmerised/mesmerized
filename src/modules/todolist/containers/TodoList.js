@@ -60,6 +60,28 @@ const getMappedItems = items => {
     }).sort(itemSorter);
 }
 
+// adds item to the todo list
+const addTodoList = (context, ev) => {
+    const target = ev.target;
+    const value = target.value.trim();
+
+    if (!value) return true;
+
+    try {
+        Actions.addItem({ value });
+        const { purgeInterval } = context.props;
+        // also purge older completed entries
+        // as that can get piled up in the list
+        purgeCompletedOldEntries(purgeInterval);
+        // empty new item input
+        target.value = '';
+        // @todo: scroll target to view
+        target.focus();
+    } catch (ex) {
+        // @todo: catch add errors
+    }
+}
+
 class TodoList extends Component {
     state = {
         showNew: false,
@@ -78,29 +100,14 @@ class TodoList extends Component {
 
         if (key !== KEYS.ENTER) return true;
 
-        const target = ev.target;
-        const value = target.value.trim();
-
-        if (!value) return true;
-
-        try {
-            Actions.addItem({ value });
-            // also purge older completed entries
-            // as that can get piled up in the list
-            const { purgeInterval } = this.props;
-            purgeCompletedOldEntries(purgeInterval);
-            // empty new item input
-            target.value = '';
-            // @todo: scroll target to view
-            target.focus();
-        } catch(ex) {
-            // @todo: catch add errors
-        }
+        return addTodoList(this, ev);
     };
 
     handleNewItemInputBlur = ev => {
         const value = ev.target.value.trim();
-        !value && this.setState({showNew: false});
+
+        if (value) addTodoList(this, ev);
+        this.setState({showNew: false});
     };
 
     componentDidMount() {
