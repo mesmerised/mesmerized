@@ -7,7 +7,7 @@ import { settingsFactory } from '@utils/settings.utils';
  * @type {Object}
  */
 const defaults = {
-    showTodoList: false,
+    showTodoList: true,
     purgeInterval: PURGE_INTERVALS.THREE_DAYS,
 }
 
