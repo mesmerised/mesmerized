@@ -21,6 +21,9 @@
 	<meta name="twitter:description" content="Transform your new tabs. Be inspired with the beautiful backgrounds, inspirational quotes, weather forecasts, to-do lists and more." />
 	<meta name="twitter:image" content="https://mesmerized.me/assets/img/title.png" />
 
+	<!-- manage inline installs -->
+	<link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/ieklodmmjfoaelcnfoilfcodkmicbooc">
+
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" integrity="sha384-3AB7yXWz4OeoZcPbieVW64vVXEwADiYyAEhwilzWsLw+9FgqpyjjStpPnpBO8o8S" crossorigin="anonymous">
@@ -125,47 +128,7 @@
 		<p><i class="fa fa-envelope"></i> <a href="mailto:support@mesmerized.me" target="_blank">support@mesmerized.me</a></p>
 	</footer>
 
-	<script>
-		function addClass(el, className) {
-			if (el.classList) {
-				el.classList.add(className);
-			} else {
-				el.className += ' ' + className;
-			}
-			return el;
-		}
-
-		function removeClass(el, className) {
-			if (el.classList) {
-				el.classList.remove(className);
-			}
-			else {
-				el.className = el.className.replace(new RegExp('(^|\\b)' + className.split(' ').join('|') + '(\\b|$)', 'gi'), ' ');
-			}
-		}
-
-		var result = browser();
-		var installBtn = document.getElementById('installBtn');
-		var mobileMsg = document.getElementById('mobileMsg');
-		var chromeWebstoreUrl = 'https://chrome.google.com/webstore/detail/mesmerized/ieklodmmjfoaelcnfoilfcodkmicbooc';
-		var firefoxStoreUrl = 'https://addons.mozilla.org/en-US/firefox/addon/mesmerized/';
-
-		if (result.mobile) {
-			addClass(installBtn, 'disabled');
-			removeClass(mobileMsg, 'hidden');
-		}
-		else {
-			if (result.name === 'chrome') {
-				installBtn.setAttribute('href', chromeWebstoreUrl);
-				installBtn.textContent = 'Install for Chrome';
-			} else if (result.name === 'firefox') {
-				installBtn.setAttribute('href', firefoxStoreUrl);
-				installBtn.textContent = 'Install for Firefox';
-			} else {
-				addClass(installBtn, 'disabled');
-			}
-		}
-	</script>
+	<script src="assets/js/init.js"></script>
 
 </body>
 
