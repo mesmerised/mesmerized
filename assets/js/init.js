@@ -39,7 +39,7 @@ ready(function() {
     var firefoxStoreUrl = 'https://addons.mozilla.org/en-US/firefox/addon/mesmerized/';
 
     function onInstallSuccess() {
-        installBtn.textContent = 'Already Installed for Chrome';
+        installBtn.textContent = 'Installed for Chrome';
         addClass(installBtn, 'disabled');
         installBtn.removeEventListener('click', installBtnClickHandler);
     }
@@ -60,11 +60,14 @@ ready(function() {
     if (result.mobile) {
         addClass(installBtn, 'disabled');
         removeClass(mobileMsg, 'hidden');
+        installBtn.setAttribute('href', chromeWebstoreUrl);
     }
     else {
         if (result.name === 'chrome') {
+            // @fixme:
+            // chrome.app.isInstalled doesn't work for extensions yet :/
+            // https://bugs.chromium.org/p/chromium/issues/detail?id=129960
             if (!chrome.app.isInstalled) {
-                installBtn.setAttribute('href', chromeWebstoreUrl);
                 installBtn.textContent = 'Install for Chrome';
                 installBtn.addEventListener('click', installBtnClickHandler);
             } else {
