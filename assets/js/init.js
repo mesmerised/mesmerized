@@ -1,3 +1,8 @@
+var chrome = chrome || {
+    app: { isInstalled: false },
+    webstore: {}
+};
+
 function ready(fn) {
     if (document.attachEvent
         ? document.readyState === 'complete'
@@ -28,10 +33,6 @@ ready(function() {
     }
 
     var result = browser();
-    var chrome = chrome || {
-        app: { isInstalled: false },
-        webstore: {}
-    };
     var installBtn = document.getElementById('installBtn');
     var mobileMsg = document.getElementById('mobileMsg');
     var chromeWebstoreUrl = 'https://chrome.google.com/webstore/detail/mesmerized/ieklodmmjfoaelcnfoilfcodkmicbooc';
