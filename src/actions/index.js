@@ -1,4 +1,8 @@
-import { refreshModules, toggleTodoListVisibility } from './modules';
+import {
+    refreshModules,
+    toggleTodoListVisibility,
+    addStickyNote
+} from './modules';
 import { openSettingsPage, resetApp } from './settings';
 
 export {
@@ -6,4 +10,5 @@ export {
     toggleTodoListVisibility,
     openSettingsPage,
     resetApp,
+    addStickyNote,
 }

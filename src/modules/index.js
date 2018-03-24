@@ -3,6 +3,7 @@ import * as Clock from './clock';
 import * as Quotes from './quotes';
 import * as Weather from './weather';
 import * as TodoList from './todolist';
+import * as Notes from './notes';
 
 export {
     Background,
@@ -10,4 +11,5 @@ export {
     Quotes,
     Weather,
     TodoList,
+    Notes,
 };
