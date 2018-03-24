@@ -18,17 +18,14 @@ Following modules are available for now, more to come soon.
 - Quotes
 - Weather
 - Todo List
+- Notes
 - Clock
 
 ### Screenshots
 
-![mesmerized01](./images/mesmerized01.png)
-
 ![mesmerized02](./images/mesmerized02.png)
 
-![mesmerized03](./images/mesmerized03.png)
-
-![mesmerized04](./images/mesmerized04.png)
+![mesmerized06](./images/mesmerized06.png)
 
 ![mesmerized05](./images/mesmerized05.png)
 

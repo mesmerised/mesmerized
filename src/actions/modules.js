@@ -17,8 +17,15 @@ const { TodoList: TodoListModule = {} } = Modules;
 const { Actions: TodoListModuleActions = {} } = TodoListModule;
 const { toggleTodoList } = TodoListModuleActions;
 
+const { Notes: NotesModule = {} } = Modules;
+const { Actions: NotesModuleActions = {} } = NotesModule;
+const { addItem } = NotesModuleActions;
+
 export const refreshModules = () =>
     refreshFunctions.forEach(fn => fn());
 
 export const toggleTodoListVisibility = () =>
     toggleTodoList && toggleTodoList();
+
+export const addStickyNote = () =>
+    addItem && addItem();

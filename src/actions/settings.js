@@ -1,6 +1,9 @@
 export const openSettingsPage = () =>
     chrome.runtime.openOptionsPage();
 
+export const resetApp = () =>
+    localStorage.clear();
+
 /**
  * A generic action to set the setting on the Settings object
  * of the module and update the store. It is handy for updating

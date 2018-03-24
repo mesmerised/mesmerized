@@ -3,6 +3,7 @@ import Layout from 'react-toolbox/lib/layout/Layout';
 import Panel from 'react-toolbox/lib/layout/Panel';
 import List from 'react-toolbox/lib/list/List';
 import ListDivider from 'react-toolbox/lib/list/ListDivider';
+import AppResetSetting from '@components/AppResetSetting';
 import * as Modules from '@modules';
 import './Settings.css';
 
@@ -14,7 +15,7 @@ const moduleKeysLastIndex = moduleKeys.length - 1;
 // container separated by the `ListDivider`
 // eg:
 //  settingsContainerItems = [
-//      <BackgroudSettings />
+//      <BackgroundSettings />
 //      <ListDivider />
 //      <ClockSettings />
 //      <ListDivider />
@@ -41,6 +42,8 @@ class Settings extends Component {
                     <div className="settings__container">
                         <List selectable ripple>
                             { settingsContainerItems }
+                            <ListDivider />
+                            <AppResetSetting />
                         </List>
                     </div>
                 </Panel>

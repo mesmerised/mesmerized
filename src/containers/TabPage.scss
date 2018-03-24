@@ -13,13 +13,16 @@ body {
             transition: right .2s ease;
             right: -36px;
             display: flex;
+
             &:hover {
                 right: 0px;
+
                 .panel__topContainer__icon {
                     opacity: 0;
                 }
             }
         }
+
         &_left {
             left: 0px;
         }
@@ -51,8 +54,16 @@ body {
     &__draggableContainer {
         position: absolute;
         top: 42px;
-        right: 42px;
         z-index: 2;
+
+        &_right {
+            right: 42px;
+        }
+
+        &_left {
+            top: 80px;
+            left: 42px;
+        }
     }
 }
 

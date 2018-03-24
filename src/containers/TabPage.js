@@ -6,9 +6,11 @@ import { Container as QuotesContainer } from '@modules/quotes';
 import { Container as ClockContainer } from '@modules/clock';
 import { Container as WeatherContainer } from '@modules/weather';
 import { Container as TodoListContainer } from '@modules/todolist';
+import { Container as NotesContainer } from '@modules/notes';
 import SettingsIcon from '@components/SettingsIcon';
 import RefreshIcon from '@components/RefreshIcon';
 import TodoListIcon from '@components/TodoListIcon';
+import NotesIcon from '@components/NotesIcon';
 import FaCogs from 'react-icons/lib/fa/cogs';
 import './TabPage.css';
 
@@ -29,9 +31,13 @@ class TabPage extends Component {
                                 <SettingsIcon />
                                 <RefreshIcon />
                                 <TodoListIcon />
+                                <NotesIcon />
                             </div>
                         </div>
-                        <div className="panel__draggableContainer">
+                        <div className="panel__draggableContainer panel__draggableContainer_left">
+                            <NotesContainer />
+                        </div>
+                        <div className="panel__draggableContainer panel__draggableContainer_right">
                             <TodoListContainer />
                         </div>
                         <div className="panel__topContainer panel__topContainer_left">
