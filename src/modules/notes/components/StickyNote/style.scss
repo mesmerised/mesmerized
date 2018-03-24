@@ -1,0 +1,211 @@
+.sticky-note {
+    &__container {
+        perspective: 1000px;
+
+        &.hover {
+            .sticky-note__body {
+                transform: rotateY(180deg);
+            }
+        }
+
+        &:hover {
+            .sticky-note__editIcon {
+                opacity: 1;
+                z-index: 1;
+            }
+        }
+    }
+
+    &__container,
+    &__front,
+    &__back {
+        width: 245px;
+        height: 220px;
+    }
+
+    &__body {
+        width: 245px;
+        position: relative;
+        display: inline-block;
+        transition: 0.6s;
+        transform-style: preserve-3d;
+        border-bottom-right-radius: 60px 5px;
+    }
+
+    &__textarea {
+        width: 100%;
+        border: none;
+        outline: none;
+        background: transparent;
+        line-height: 1.4;
+        font-size: 18px;
+        font-family: cursive;
+        color: #000000;
+        resize: none;
+        overflow: hidden;
+        min-height: 100%;
+        cursor: default;
+
+        &:focus {
+            cursor: default;
+        }
+    }
+
+    &__front,
+    &__back {
+        backface-visibility: hidden;
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        &:after {
+            content: "";
+            position: absolute;
+            z-index: -1;
+            right: -0px;
+            bottom: 20px;
+            width: 200px;
+            height: 25px;
+            background: rgba(0, 0, 0, 0.2);
+            box-shadow: 2px 15px 5px rgba(0, 0, 0, 0.4);
+            transform: matrix(-1, -0.1, 0, 1, 0, 0);
+        }
+
+        &__content {
+            width: 100%;
+            height: 100%;
+            padding: 14px;
+        }
+    }
+
+    &__front {
+        z-index: 2;
+        transform: rotateY(0deg);
+
+        &__content {}
+    }
+
+    &__back {
+        transform: rotateY(180deg);
+
+        &__content {
+            display: flex;
+            flex-direction: column;
+            background: #535355;
+        }
+
+        &__footer {
+            margin-left: auto;
+        }
+    }
+
+    &__editIcon {
+        color: #000000;
+        font-size: 16px;
+        position: absolute;
+        right: 4px;
+        bottom: 4px;
+        z-index: -1;
+        opacity: 0;
+        transition: opacity ease 0.8s;
+        border-radius: 50%;
+        padding: 1px;
+        cursor: pointer;
+
+        &:hover {
+            background: #cccccc;
+        }
+    }
+
+    &__deleteIcon {
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+
+    &__theme {
+        &_default {
+            &__preview, .sticky-note__front__content {
+                background: linear-gradient(135deg, #ffff88 81%, #ffff88 82%, #ffff88 82%, #ffffc6 100%);
+            }
+        }
+
+        &_yellow {
+            &__preview, .sticky-note__front__content {
+                background: linear-gradient(#CAC531, #F3F9A7);
+            }
+        }
+
+        &_orange {
+            &__preview, .sticky-note__front__content {
+                background: linear-gradient(#D1913C, #FFD194);
+            }
+        }
+
+        &_red {
+            &__preview, .sticky-note__front__content {
+                background: linear-gradient(#e52d27, #b31217);
+            }
+        }
+
+        &_green {
+            &__preview, .sticky-note__front__content {
+                background: linear-gradient(#76b852, #8DC26F);
+            }
+        }
+
+        &_blue {
+            &__preview, .sticky-note__front__content {
+                background: linear-gradient(#0072ff, #5691c8);
+            }
+        }
+
+        &_purple {
+            &__preview, .sticky-note__front__content {
+                background: linear-gradient(#4e54c8, #8f94fb);
+            }
+        }
+
+        &_lightpurple {
+            &__preview, .sticky-note__front__content {
+                background: linear-gradient(#C9D6FF, #E2E2E2);
+            }
+        }
+
+        &_metallic {
+            &__preview, .sticky-note__front__content {
+                background: linear-gradient(#abbaab, #ffffff);
+            }
+        }
+
+        &_offwhite {
+            &__preview, .sticky-note__front__content {
+                background: linear-gradient(#ECE9E6, #FFFFFF);
+            }
+        }
+
+        &__selector {
+            display: flex;
+            flex: 1 1 auto;
+            flex-flow: row wrap;
+            justify-content: space-around;
+            margin-top: 32px;
+            margin-bottom: 32px;
+
+            &_box {
+                width: 32px;
+                height: 32px;
+                box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.4);
+                margin: 5px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                &_icon {
+                    color: #000000;
+                    font-size: 26px;
+                }
+            }
+        }
+    }
+}
