@@ -1,13 +1,18 @@
 @font-face {
     font-family: 'Roboto';
-    src:    local('Roboto Regular'),
-            url('../fonts/Roboto-Regular.woff2') format('woff2'),
-            url('../fonts/Roboto-Regular.woff') format('woff');
+    src: local("Roboto Regular"), url("../fonts/Roboto-Regular.woff2") format("woff2"), url("../fonts/Roboto-Regular.woff") format("woff");
 }
 
 @font-face {
     font-family: 'MeteoconsRegular';
-    src: url('../fonts/meteocons-webfont.woff') format('woff');
+    src: url("../fonts/meteocons-webfont.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Marker-Felt';
+    src: url("../fonts/Marker-Felt.ttf.woff") format("woff");
     font-weight: normal;
     font-style: normal;
 }

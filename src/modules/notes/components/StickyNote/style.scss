@@ -1,3 +1,42 @@
+.animated {
+    animation-duration: 1s;
+    animation-fill-mode: both;
+}
+
+@keyframes rubberBand {
+    from {
+        transform: scale3d(1, 1, 1);
+    }
+
+    30% {
+        transform: scale3d(1.25, 0.75, 1);
+    }
+
+    40% {
+        transform: scale3d(0.75, 1.25, 1);
+    }
+
+    50% {
+        transform: scale3d(1.15, 0.85, 1);
+    }
+
+    65% {
+        transform: scale3d(0.95, 1.05, 1);
+    }
+
+    75% {
+        transform: scale3d(1.05, 0.95, 1);
+    }
+
+    to {
+        transform: scale3d(1, 1, 1);
+    }
+}
+
+.rubberBand {
+    animation-name: rubberBand;
+}
+
 .sticky-note {
     &__container {
         perspective: 1000px;
@@ -39,10 +78,13 @@
         background: transparent;
         line-height: 1.4;
         font-size: 18px;
-        font-family: cursive;
+        letter-spacing: 1px;
+        font-family: 'Marker-Felt', cursive;
+        font-weight: 400;
         color: #000000;
         resize: none;
         overflow: hidden;
+        overflow-y: auto;
         min-height: 100%;
         cursor: default;
 
@@ -57,6 +99,7 @@
         position: absolute;
         top: 0;
         left: 0;
+        box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.4);
 
         &:after {
             content: "";
@@ -81,8 +124,6 @@
     &__front {
         z-index: 2;
         transform: rotateY(0deg);
-
-        &__content {}
     }
 
     &__back {

@@ -14,6 +14,7 @@ const THEMES = [
 
 const getThemeSelectionBoxes = ({ onThemeSelect, selectedTheme }) => THEMES.map(theme => (
     <div
+        key={theme}
         className={`sticky-note__theme__selector_box sticky-note__theme_${theme}__preview`}
         onClick={() => onThemeSelect(theme)} >
         {selectedTheme === theme &&
@@ -34,26 +35,19 @@ class StickyNote extends Component {
         this.setState({ flipped });
     }
 
-    handleThemeChange = (theme) => {
-        const { onThemeChange } = this.props;
-
-        this.setState({ theme });
-        onThemeChange && onThemeChange(theme);
-    }
-
     render() {
         const {
             note,
             defaultDragPosition,
+            applyAnimation,
             onNoteChange,
             onDeleteClick,
-            onDragStop
+            onDragStop,
+            onThemeChange
         } = this.props;
 
-        let { theme } = this.state;
+        const { theme } = this.props;
         const { flipped } = this.state;
-
-        theme = theme || this.props.theme;
 
         return (
             <Draggable
@@ -62,7 +56,7 @@ class StickyNote extends Component {
                 onStop={onDragStop}
                 defaultPosition={defaultDragPosition} >
                 <div>
-                    <div className={`sticky-note__container ${flipped ? 'hover' : ''} sticky-note__theme_${theme}`}>
+                    <div className={`sticky-note__container ${flipped ? 'hover' : ''} sticky-note__theme_default sticky-note__theme_${theme} ${applyAnimation ? 'animated rubberBand' : ''}`}>
                         <div className="sticky-note__body">
                             <div className="sticky-note__front">
                                 <div className="sticky-note__front__content">
@@ -84,7 +78,7 @@ class StickyNote extends Component {
                                     <div className="sticky-note__theme__selector">
                                         {
                                             getThemeSelectionBoxes({
-                                                onThemeSelect: this.handleThemeChange,
+                                                onThemeSelect: onThemeChange,
                                                 selectedTheme: theme
                                             })
                                         }
