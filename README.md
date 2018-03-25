@@ -2,7 +2,7 @@
     <img src="./images/title.png" alt="mesmerized" />
 </p>
 
-Browser Extension to give a fresh look to your new tab page, with beautiful backgrounds, inspirational quotes, weather forecasts, reminders, to-do lists and much more.
+Browser Extension to give a fresh look to your new tab page, with beautiful backgrounds, inspirational quotes, weather forecasts, sticky notes, to-do lists and much more.
 
 ### Downloads
 
@@ -18,7 +18,7 @@ Following modules are available for now, more to come soon.
 - Quotes
 - Weather
 - Todo List
-- Notes
+- Sticky Notes
 - Clock
 
 ### Screenshots
@@ -42,8 +42,8 @@ npm build       # builds extension
 ```
 
 Once the dev server has been started, visit
-- http://localhost:PORT/tabpage.html for debugging tab page
-- http://localhost:PORT/tabpage.html for debugging settings page
+- http://localhost:3000/tabpage.html for debugging tab page
+- http://localhost:3000/options.html for debugging settings page
 
 ### Contributions
 
