@@ -20,4 +20,4 @@ export const getStateObject = () => {
     return { fetchFromServer, showQuotes, quote };
 };
 
-export default createStore(getStateObject());;
+export default createStore();;

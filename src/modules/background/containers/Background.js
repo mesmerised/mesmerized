@@ -4,6 +4,7 @@ import CreditsComponent from '../components/Credits';
 import placeholderImage from '../images/placeholder.jpeg';
 import { prefetchRandomPhotos } from '../utils/api';
 import ConnectedStoreHOC from '../utils/connect.store.hoc';
+import * as Actions from '../utils/actions';
 
 class Background extends Component {
     static defaultProps = {
@@ -27,6 +28,8 @@ class Background extends Component {
         const { fetchFromServer } = this.props;
         // start prefetching if configured in settings
         fetchFromServer && prefetchRandomPhotos();
+        // lazy initialize the state object
+        setTimeout(() => Actions.refresh(false), 0);
     }
 
     render() {

@@ -3,9 +3,9 @@ import { prefetchRandomPhotos } from './api';
 import Settings from './settings';
 import { setSettingByStoreAndSettings } from '@actions/settings';
 
-export const refresh = () => {
+export const refresh = (force = true) => {
     const { photoUrl: previousPhotoUrl } = store.state;
-    const updatedState = getStateObject(true);
+    const updatedState = getStateObject(force);
     const { fetchFromServer } = updatedState;
     // prefetch if allowed by settings
     fetchFromServer && prefetchRandomPhotos();

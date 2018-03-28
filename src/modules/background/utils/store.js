@@ -47,4 +47,4 @@ export const getStateObject = (force = false) => {
     };
 };
 
-export default createStore(getStateObject());;
+export default createStore();

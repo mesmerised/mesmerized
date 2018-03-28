@@ -2,10 +2,16 @@ import * as StorageUtils from '@utils/storage.utils';
 import cacheConfigs from '../configs/cache.config';
 import { METRIC } from '../configs/constants';
 import { toCelsius, toFahrenheit } from '@utils/general.utils';
-import store, { getSettingsObject } from './store';
+import store, { getStateObject } from './store';
 import { getWeatherForLocation } from '../utils/api';
 import Settings from './settings';
 import { setSettingByStoreAndSettings } from '@actions/settings';
+
+
+export function refresh(force = true) {
+    store.state = { ...store.state, ...getStateObject() };
+    refreshWeather({ cacheEnabled: !force });
+}
 
 export function updatePosition(payload = {}) {
     let { position = {} } = payload;
@@ -25,7 +31,7 @@ export function updatePosition(payload = {}) {
 }
 
 export function handleDataUpdate(payload = {}) {
-    const { data = {}, additionalStateData = {} } = payload;
+    const { data = {} } = payload;
     const { main = {}, weather = [], name: cityName = '' } = data;
     const { temp } = main;
     const { icon: iconId } = weather[0];
@@ -41,26 +47,22 @@ export function handleDataUpdate(payload = {}) {
     store.state = {
         ...store.state,
         temperature, isLoading, cityName, iconId,
-        ...additionalStateData
     };
 }
 
-export async function refresh(payload = {}) {
+export async function refreshWeather(payload = {}) {
+    const { showWeather } = store.state;
+
+    // no need to make a query if the
+    // the module is disabled in settings
+    if (!showWeather) return;
+
     const { cacheEnabled = false } = payload;
     const { position = {} } = store.state;
     const { coords = {} } = position;
     const { latitude, longitude } = coords;
-    const Settings = getSettingsObject();
 
     if (!latitude || !longitude) return;
-
-    // no need to make a query if the
-    // the module is disabled in settings
-    // update the settings state and return
-    if (!Settings.showWeather) {
-        store.state = {...store.state, ...Settings};
-        return;
-    }
 
     let { refreshInterval } = store.state;
     if (!cacheEnabled) refreshInterval = 0;
@@ -70,7 +72,7 @@ export async function refresh(payload = {}) {
     try {
         const data = await getWeatherForLocation(
             {latitude, longitude, refreshInterval});
-        handleDataUpdate({data, additionalStateData: Settings});
+        handleDataUpdate({data});
     } catch(ex) {
         // do nothing on weather update failure
         // the state would not change and

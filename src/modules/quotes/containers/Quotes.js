@@ -2,11 +2,14 @@ import React, { Component } from 'react';
 import QuotesComponent from '../components/Quote';
 import { prefetchRandomQuote } from '../utils/api';
 import ConnectedStoreHOC from '../utils/connect.store.hoc';
+import * as Actions from '../utils/actions';
 
 class Quotes extends Component {
     componentDidMount() {
         const { fetchFromServer } = this.props;
         fetchFromServer && prefetchRandomQuote();
+        // lazy initialize the state object
+        setTimeout(() => Actions.refresh(), 0);
     }
 
     render() {
@@ -14,6 +17,9 @@ class Quotes extends Component {
 
         const author  = quote.quoteAuthor || 'Anonymous';
         const text = quote.quoteText;
+
+        if (!showQuotes || !text) return null;
+
         const props = { author, text };
 
         return (

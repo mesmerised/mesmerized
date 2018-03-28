@@ -5,18 +5,15 @@ import Settings from './settings';
 
 const lastPositionCacheKey = cacheConfigs.lastPosition;
 
-export const getSettingsObject = () => ({
+export const getStateObject = () => ({
     unit: Settings.unit,
     refreshInterval: Settings.refreshInterval,
     showWeather: Settings.showWeather,
-});
-
-const initialState = {
     position: StorageUtils.get(lastPositionCacheKey) || {},
     temperature: 0,
     cityName: '',
     iconId: '',
     isLoading: true,
-};
+});
 
-export default createStore({...getSettingsObject(), ...initialState});
+export default createStore();
