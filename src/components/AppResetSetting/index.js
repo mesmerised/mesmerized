@@ -20,6 +20,7 @@ class AppResetSetting extends Component {
 
     resetExtension = () => {
         Actions.resetApp();
+        Actions.refreshModules();
         this.handleToggle();
         this.setState({ isSnackbarActive: true });
     }
