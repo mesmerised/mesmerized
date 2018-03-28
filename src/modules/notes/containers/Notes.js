@@ -4,6 +4,11 @@ import StickyNote from '../components/StickyNote';
 import * as Actions from '../utils/actions';
 
 class Notes extends Component {
+    componentDidMount() {
+        // lazy initialize the state object
+        setTimeout(() => Actions.refresh(), 0);
+    }
+
     render() {
         const { positions, items = {} } = this.props;
 

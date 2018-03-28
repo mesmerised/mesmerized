@@ -7,31 +7,34 @@ const GEO_OPTIONS = { enableHighAccuracy: true };
 const cacheEnabled = true;
 
 class Weather extends Component {
+    handleGeolocationUpdate = position => {
+        Actions.updatePosition({ position });
+        Actions.refreshWeather({ cacheEnabled });
+    };
+
     // @todo: handle geolocation errors
     componentDidMount() {
-        const { refreshInterval } = this.props;
+        // lazy initialize the state object
+        // also initialize the initial update
+        setTimeout(() => {
+            Actions.refresh(false);
 
-        // initialize the initial update
-        Actions.refresh({cacheEnabled});
+            const { refreshInterval } = this.props;
+            // update in the given intervals
+            this.intervalId = setInterval(() =>
+                Actions.refreshWeather({ cacheEnabled }), refreshInterval);
 
-        // update in the given intervals
-        this.intervalId = setInterval(() =>
-            Actions.refresh({cacheEnabled}), refreshInterval);
-
-        // listen to any geolocation updates
-        this.wpid = navigator.geolocation.watchPosition(
-            this.handleGeolocationUpdate, () => {}, GEO_OPTIONS);
+            const { handleGeolocationUpdate } = this;
+            // listen to any geolocation updates
+            this.wpid = navigator.geolocation.watchPosition(
+                handleGeolocationUpdate, () => { }, GEO_OPTIONS);
+        }, 0);
     }
 
     componentWillUnmount() {
         this.intervalId && clearInterval(this.intervalId);
         this.wpid && navigator.geolocation.clearWatch(this.wpid);
     }
-
-    handleGeolocationUpdate = position => {
-        Actions.updatePosition({position});
-        Actions.refresh({cacheEnabled});
-    };
 
     render() {
         const {

@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { Component } from 'react';
 import List from 'react-toolbox/lib/list/List';
 import ListSubHeader from 'react-toolbox/lib/list/ListSubHeader';
 import ListCheckbox from 'react-toolbox/lib/list/ListCheckbox';
 import ListItem from 'react-toolbox/lib/list/ListItem';
 import Dropdown from 'react-toolbox/lib/dropdown/Dropdown';
 import ConnectedStoreHOC from '../utils/connect.store.hoc';
-import { setSetting } from '../utils/actions';
+import * as Actions from '../utils/actions';
 import { NEW_PHOTO_DURATIONS } from '../configs/constants';
 
 const NEW_PHOTO_INTERVAL_OPTIONS = [
@@ -15,10 +15,10 @@ const NEW_PHOTO_INTERVAL_OPTIONS = [
 ];
 
 const handleFetchFromServerChange = (value, ev) =>
-    setSetting({fetchFromServer: value});
+    Actions.setSetting({ fetchFromServer: value });
 
 const handleNewPhotoIntervalChange = (value, ev) =>
-    setSetting({ newPhotoDuration: parseInt(value, 10) });
+    Actions.setSetting({ newPhotoDuration: parseInt(value, 10) });
 
 const NewPhotoIntervalDropdown = ({ refreshInterval, className }) => (
     <Dropdown
@@ -29,26 +29,36 @@ const NewPhotoIntervalDropdown = ({ refreshInterval, className }) => (
         onChange={handleNewPhotoIntervalChange} />
 );
 
-const SettingsContainer = ({ fetchFromServer, newPhotoDuration }) => (
-    <List selectable ripple>
-        <ListSubHeader caption="Background Photos" />
-        <ListCheckbox
-            caption="Load Fresh"
-            legend="If disabled, it will cycle through a list of locally stored wallpapers only."
-            checked={ fetchFromServer }
-            onChange={ handleFetchFromServerChange } />
-        <ListItem
-            itemContent={
-                <div>
-                    <p className="settings__inlineItem">Show new photo</p>
-                    <NewPhotoIntervalDropdown
-                        className="settings__inlineItem"
-                        refreshInterval={newPhotoDuration} />
-                </div>
-            }
-            ripple={false}
-            selectable={false} />
-    </List>
-);
+class SettingsContainer extends Component {
+    componentDidMount() {
+        // lazy initialize the state object
+        setTimeout(() => Actions.refresh(false), 0);
+    }
+
+    render() {
+        const { fetchFromServer, newPhotoDuration } = this.props;
+
+        return (
+            <List selectable ripple>
+                <ListSubHeader caption="Background Photos" />
+                <ListCheckbox
+                    caption="Load Fresh"
+                    legend="If disabled, it will cycle through a list of locally stored wallpapers only."
+                    checked={fetchFromServer}
+                    onChange={handleFetchFromServerChange} />
+                <ListItem
+                    itemContent={
+                        <div>
+                            <p className="settings__inlineItem">Show new photo</p>
+                            <NewPhotoIntervalDropdown
+                                className="settings__inlineItem"
+                                refreshInterval={newPhotoDuration} />
+                        </div>
+                    }
+                    ripple={false}
+                    selectable={false} />
+            </List>);
+    }
+}
 
 export default ConnectedStoreHOC(SettingsContainer);

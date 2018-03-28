@@ -10,4 +10,4 @@ export const getStateObject = () => ({
     items: StorageUtils.get(itemsCacheKey) || {},
 });
 
-export default createStore({...getStateObject()});;
+export default createStore();

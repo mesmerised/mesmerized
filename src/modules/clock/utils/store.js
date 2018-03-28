@@ -8,4 +8,4 @@ export const getSettingsObject = () => ({
     showDate: Settings.showDate,
 });
 
-export default createStore(getSettingsObject());;
+export default createStore();
