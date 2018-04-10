@@ -56,11 +56,11 @@ export function fetchRandomPhotos(params = {}) {
  */
 export async function prefetchRandomPhotos() {
     const prefetchedPhotos = StorageUtils.get(prefetchedPhotoCacheKey);
-    const exisitngPrefetchedPhotosCount = prefetchedPhotos
+    const existingPrefetchedPhotosCount = prefetchedPhotos
         && Object.keys(prefetchedPhotos).length;
 
     // if sufficient buffer, do not prefetch
-    if (exisitngPrefetchedPhotosCount >= PREFETCH_THRESHOLD) return;
+    if (existingPrefetchedPhotosCount >= PREFETCH_THRESHOLD) return;
 
     // call random photos api
     // then use image prefetch technique to prefetch the photo url
