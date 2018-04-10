@@ -22,31 +22,35 @@ function getLocalPhotosFromCache() {
     return localPhotos;
 }
 
-const categories = Object.keys(categoriesConfig);
-
-// if the local photo paths are not populated
-// dynamically import all locally stored photos json
-// along with their paths and update the local storage
-// to indicate they are available for the next usage
-// storage format -> { 'local/path/to/photo' : {photo_json} }
-!getLocalPhotosFromCache() && categories.forEach(c => {
-    // @todo: Investigate
-    // cannot store ../images/categories as a variable
-    // as the base path would not be identified by
-    // webpack for some reason and import would fail
-    import(`../images/categories/${c}.json`)
-        .then(photos => {
-            photos.forEach(p => {
-                import(`../images/categories/${c}/${p.id}.jpg`)
-                    .then(path => {
-                        StorageUtils.update(localPhotosCacheKey, {[path]: p});
-                        // also prefetch image to be able to
-                        // get loaded from disk cache
-                        prefetchImage(path).catch(x => x);
-                    }).catch(error => error);
+/**
+ * Populates the local photos cache.
+ */
+function initializeLocalPhotosCache() {
+    const categories = Object.keys(categoriesConfig);
+    // if the local photo paths are not populated
+    // dynamically import all locally stored photos json
+    // along with their paths and update the local storage
+    // to indicate they are available for the next usage
+    // storage format -> { 'local/path/to/photo' : {photo_json} }
+    categories.forEach(async c => {
+        try {
+            // @todo: Investigate
+            // cannot store ../images/categories as a variable
+            // as the base path would not be identified by
+            // webpack for some reason and import would fail
+            const photos = await import(`../images/categories/${c}.json`);
+            photos.forEach(async p => {
+                const path = await import(`../images/categories/${c}/${p.id}.jpg`);
+                StorageUtils.update(localPhotosCacheKey, { [path]: p });
+                // also prefetch image to be able to
+                // get loaded from disk cache
+                prefetchImage(path).catch(x => x);
             });
-        }).catch(error => error);
-});
+        } catch (error) {
+            // @todo: log error ???
+        }
+    });
+}
 
 /**
  * Extracts local path from the photo object.
@@ -70,8 +74,12 @@ export function getLocalPhotoPath(photo = {}) {
 export function getRandomLocalPhoto() {
     const localPhotos = getLocalPhotosFromCache();
 
-    // no local photos, return
-    if (!localPhotos) return;
+    // no local photos
+    // initialize the cache and return
+    if (!localPhotos) {
+        initializeLocalPhotosCache();
+        return;
+    }
 
     // there is at least one local photo, pick a random one
     // @todo: optimize randomness to favour least shown photo
