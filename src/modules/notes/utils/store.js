@@ -7,7 +7,7 @@ const itemsCacheKey = cacheConfigs.items;
 
 export const getStateObject = () => ({
     positions: StorageUtils.get(lastPositionsCacheKey) || {},
-    items: StorageUtils.get(itemsCacheKey) || {},
+    items: StorageUtils.get(itemsCacheKey),
 });
 
 export default createStore();

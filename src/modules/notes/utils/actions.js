@@ -2,8 +2,22 @@ import * as StorageUtils from '@utils/storage.utils';
 import cacheConfigs from '../configs/cache.config';
 import store, { getStateObject } from './store';
 
-export const refresh = () =>
-    store.state = { ...store.state, ...getStateObject() };
+const DEFAULT_NOTE_MESSAGE = '→ Hover and click the info icon for options.\n\n→ Use menu in the top right corner to add more.'
+
+export const refresh = () => {
+    const stateObj = getStateObject();
+
+    // add an empty default sticky note item
+    // in case there are no items to begin with
+    // this would ensure that there is a
+    // sticky note to show on first installs
+    if (!stateObj.items) {
+        const value = DEFAULT_NOTE_MESSAGE;
+        stateObj.items = addItemToStorage({ value });
+    }
+
+    store.state = { ...store.state, ...stateObj };
+}
 
 /**
  * Useful to cache the last drag position of the
@@ -61,10 +75,12 @@ function getUniqueId() {
 
 /**
  * Adds a new note item to the existing sticky notes list.
+ * Returns the newly added note item object.
  *
  * @param {Object} payload  Payload with value
+ * @return {Object} The newly added note object
  */
-export function addItem(payload = {}) {
+function addItemToStorage(payload = {}) {
     const { value, theme } = payload;
 
     const id = getUniqueId();
@@ -72,6 +88,18 @@ export function addItem(payload = {}) {
     const itemObj = { [id]: item };
 
     StorageUtils.update(cacheConfigs.items, itemObj);
+
+    return itemObj;
+}
+
+/**
+ * Adds a new note item to the existing sticky notes list.
+ * Also updates the related store and state.
+ *
+ * @param {Object} payload  Payload with value
+ */
+export function addItem(payload = {}) {
+    const itemObj = addItemToStorage(payload);
 
     store.state = {
         ...store.state,
