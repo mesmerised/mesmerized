@@ -111,11 +111,14 @@ class TodoList extends Component {
     };
 
     componentDidMount() {
+        // lazy initialize the state object
+        setTimeout(() => Actions.refresh(), 0);
+    }
+
+    componentDidUpdate() {
         const { purgeInterval } = this.props;
         // purge older completed entries on load
         purgeCompletedOldEntries(purgeInterval);
-        // lazy initialize the state object
-        setTimeout(() => Actions.refresh(), 0);
     }
 
     render() {

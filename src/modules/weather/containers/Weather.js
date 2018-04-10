@@ -12,6 +12,17 @@ class Weather extends Component {
         Actions.refreshWeather({ cacheEnabled });
     };
 
+    setupRefreshInterval = () => {
+        this.intervalId && clearInterval(this.intervalId);
+
+        const { refreshInterval } = this.props;
+
+        if (Number.isFinite(refreshInterval)) {
+            this.intervalId = setInterval(() =>
+                Actions.refreshWeather({ cacheEnabled }), refreshInterval);
+        }
+    };
+
     // @todo: handle geolocation errors
     componentDidMount() {
         // lazy initialize the state object
@@ -19,16 +30,21 @@ class Weather extends Component {
         setTimeout(() => {
             Actions.refresh(false);
 
-            const { refreshInterval } = this.props;
             // update in the given intervals
-            this.intervalId = setInterval(() =>
-                Actions.refreshWeather({ cacheEnabled }), refreshInterval);
+            this.setupRefreshInterval();
 
             const { handleGeolocationUpdate } = this;
             // listen to any geolocation updates
             this.wpid = navigator.geolocation.watchPosition(
                 handleGeolocationUpdate, () => { }, GEO_OPTIONS);
         }, 0);
+    }
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.refreshInterval !== this.props.refreshInterval) return;
+
+        // update in the given intervals
+        this.setupRefreshInterval();
     }
 
     componentWillUnmount() {
@@ -48,7 +64,7 @@ class Weather extends Component {
         if (!showWeather) return null;
 
         const props = { temperature, cityName, iconId, isLoading };
-        return <WeatherComponent { ...props } />;
+        return <WeatherComponent {...props} />;
     }
 }
 
