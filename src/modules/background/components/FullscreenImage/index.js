@@ -15,8 +15,8 @@ class FullScreenImage extends Component {
     handlePhotoLoad = (type = IMAGE_TYPE.main) => {
         const { onPhotoLoad } = this.props;
 
-        this.setState({isLoading: false});
-        onPhotoLoad && onPhotoLoad({type});
+        this.setState({ isLoading: false });
+        onPhotoLoad && onPhotoLoad({ type });
     };
 
     handleOnload = () => {
@@ -31,9 +31,9 @@ class FullScreenImage extends Component {
         const {
             src,
             placeholder,
-            style,
             timeout,
             credits,
+            previousPhotoUrl,
         } = this.props;
         const {
             isLoading
@@ -41,20 +41,23 @@ class FullScreenImage extends Component {
 
         return (
             <div className="background">
-                <div className="background__imageContainer" style={ style }>
+                <div className="background__imageContainer">
+                    {previousPhotoUrl &&
+                        <img src={previousPhotoUrl} alt=""
+                            className="background__image" />}
                     <Image
-                        key={ src }
+                        key={src}
                         extraClasses="background__image"
-                        src={ src }
-                        placeholder={ placeholder }
-                        onLoad={ this.handleOnload }
-                        onError={ this.handleOnError }
-                        timeout={ timeout } />
-                    <div className={ `background__overlay ${isLoading ? 'background__overlay_loading' : ''}` } />
+                        src={src}
+                        placeholder={placeholder}
+                        onLoad={this.handleOnload}
+                        onError={this.handleOnError}
+                        timeout={timeout} />
+                    <div className={`background__overlay ${isLoading ? 'background__overlay_loading' : ''}`} />
                 </div>
-                { credits &&
+                {credits &&
                     <div className="background__credits">
-                        { credits }
+                        {credits}
                     </div>
                 }
             </div>

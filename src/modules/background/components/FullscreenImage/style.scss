@@ -32,12 +32,12 @@
     }
 
     &__overlay {
-        background: rgba(0, 0, 0, 0.60);
+        background: rgba(0, 0, 0, 0.6);
         opacity: 0.1;
         transition: opacity 1.5s ease;
 
         &_loading {
-            background: url('../../images/pattern.png') repeat;
+            background: url("../../images/pattern.png") repeat;
             opacity: 1;
         }
     }
