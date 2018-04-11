@@ -40,12 +40,12 @@ export function getPhotoUrl(photo = {}) {
  * @return {Promise}        Promise that returns JSON data (Array of photos)
  */
 export function fetchRandomPhotos(params = {}) {
-    params = {...DEFAULTS, ...params};
+    params = { ...DEFAULTS, ...params };
 
     const url = toUrl(randomPhotoApiUrl, params);
 
     return fetch(url).then(response => response.json())
-            .catch(response => []);
+        .catch(response => []);
 }
 
 /**
@@ -66,16 +66,16 @@ export async function prefetchRandomPhotos() {
     // then use image prefetch technique to prefetch the photo url
     // then store each prefetched photo object in the cache
     // { [photo id] : { photo object }, ... }
-    const photos = await fetchRandomPhotos();
-    photos.forEach(async photo => {
-        const url = getPhotoUrl(photo);
-        try {
+    try {
+        const photos = await fetchRandomPhotos();
+        photos.forEach(async photo => {
+            const url = getPhotoUrl(photo);
             await prefetchImage(url);
-            StorageUtils.update(prefetchedPhotoCacheKey, {[photo.id]: photo});
-        } catch(ex) {
-            // do nothing on image prefetch failure
-        }
-    });
+            StorageUtils.update(prefetchedPhotoCacheKey, { [photo.id]: photo });
+        });
+    } catch (ex) {
+        // do nothing on image prefetch failure
+    }
 }
 
 /**

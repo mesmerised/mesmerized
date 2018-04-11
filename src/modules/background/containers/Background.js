@@ -16,7 +16,7 @@ class Background extends Component {
         creditType: null,
     };
 
-    handlePhotoLoad = ({type}) => {
+    handlePhotoLoad = ({ type }) => {
         this.setState({
             showCredits: true,
             creditType: type,
@@ -45,19 +45,17 @@ class Background extends Component {
 
         const credits = showCredits &&
             <CreditsComponent
-                meta={ creditType === IMAGE_TYPE.main ?
-                    photoMeta : placeholderPhotoMeta } />;
-
-        const backgroundImage = previousPhotoUrl ? `url(${previousPhotoUrl})` : 'none';
+                meta={creditType === IMAGE_TYPE.main ?
+                    photoMeta : placeholderPhotoMeta} />;
 
         return (
             <FullscreenImage
-                style={ { backgroundImage } }
-                src={ photoUrl }
-                placeholder={ placeholderPhotoUrl }
-                onPhotoLoad={ this.handlePhotoLoad }
-                timeout={ timeout }
-                credits={ credits } />
+                src={photoUrl}
+                placeholder={placeholderPhotoUrl}
+                previousPhotoUrl={previousPhotoUrl}
+                onPhotoLoad={this.handlePhotoLoad}
+                timeout={timeout}
+                credits={credits} />
         );
     }
 }
