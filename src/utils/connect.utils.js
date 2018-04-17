@@ -25,21 +25,27 @@ export const connect = (store) => (WrappedComponent) => {
     return class ConnectedComponent extends Component {
         static displayName = `HOC(${getDisplayName(WrappedComponent)})`;
 
-        state = store.state;
+        state = { data: store.state };
 
-        componentWillMount() {
-            this.unsubscribe = store.subscribe(newState => {
-                this.setState(newState);
+        componentDidMount() {
+            this._unsubscribe = store.subscribe(newState => {
+                this.setState({ data: newState });
             });
+
+            // handle cases where values could
+            // have changed between render and mount
+            if (this.state.data !== store.state) {
+                this.setState({ data: store.state });
+            }
         }
 
         componentWillUnmount() {
-            this.unsubscribe();
+            this._unsubscribe && this._unsubscribe();
         }
 
         render() {
             return (
-                <WrappedComponent { ...this.props } { ...this.state } />
+                <WrappedComponent {...this.props} {...this.state.data} />
             );
         }
     }
