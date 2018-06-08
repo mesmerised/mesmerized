@@ -1,4 +1,3 @@
-import fetchJsonp from 'fetch-jsonp';
 import { toUrl } from '@utils/url.utils';
 import * as StorageUtils from '@utils/storage.utils';
 import apiConfigs from '../configs/api.config';
@@ -6,12 +5,6 @@ import cacheConfigs from '../configs/cache.config';
 
 const randomQuoteApiUrl = apiConfigs.base;
 const randomQuoteCacheKey = cacheConfigs.randomQuotes;
-
-// random quotes api defaults
-const DEFAULTS = {
-    lang: 'en',
-    format: 'jsonp',
-};
 
 // max quotes to prefetch
 const PREFETCH_THRESHOLD = 10;
@@ -23,17 +16,15 @@ const getUniqueQuoteId = () => `quote__${quoteId++}`;
 /**
  * Fetch random quote from the API.
  *
- * @see http://forismatic.com/en/api/ -> getQuote Method
+ * @see https://forismatic.com/en/api/ -> getQuote Method
  *
  * @param  {Object} params  Supported parameters
  * @return {Promise}        Promise that returns JSON data (Quote object)
  */
 export function fetchRandomQuote(params = {}) {
-    params = {...DEFAULTS, ...params};
-
     const url = toUrl(randomQuoteApiUrl, params);
 
-    return fetchJsonp(url, {jsonpCallback: 'jsonp'})
+    return fetch(url)
             .then(response => response.json())
             .catch(response => ({}));
 }
