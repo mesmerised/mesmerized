@@ -68,8 +68,10 @@ ready(function() {
             // chrome.app.isInstalled doesn't work for extensions yet :/
             // https://bugs.chromium.org/p/chromium/issues/detail?id=129960
             if (!chrome.app.isInstalled) {
+                installBtn.setAttribute('href', chromeWebstoreUrl);
                 installBtn.textContent = 'Install for Chrome';
-                installBtn.addEventListener('click', installBtnClickHandler);
+                // inline install in disabled now https://developer.chrome.com/extensions/webstore
+                // installBtn.addEventListener('click', installBtnClickHandler);
             } else {
                 onInstallSuccess();
             }
